@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+/*Modifier le body en général*/
+body {
+    font-family: 'Roboto', sans-serif;
+    /*background-color: inherit;*/
+    padding: 0%;
+    margin: 0%;
+    color:rosybrown;
+    background: url("back.jpg");
+}
+
+body .page{
+    margin: 20px 60px;
+}
+
+/*Modifier l'aspect des boutons des différentes catégories du site*/
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    /*background-color: rgb(144, 144, 255);*/
+    padding: 10px 0px;
+}
+
+nav .onglets{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 5px;
+}
+
+nav .onglets a {
+    margin-right: 20px /*Margin sert à réduire ou augmenter l'espace invisible entre des éléments*/;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+    font-size: 21px;
+    padding: 0 15px;
+}
+
+nav .onglets a:hover{
+    background-color: aliceblue;
+    font-weight: bold;
+    color: royalblue;
+}
+
+/*Modifier l'aspect des gros boutons sur la droite */
+nav .buttons button {
+    padding: 13px 20px; /*Padding sert à réduire ou augmenter la taille d'un élément*/
+    color: black;
+    border: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    cursor: pointer;
+    outline: none;
+}
+
+/*Modifier le bouton "S'authentifier"*/
+nav .buttons .login{
+    background-color: inherit /*<= Prends la couleur du fond du parent*/;
+    margin-right: 10px;
+    color: aliceblue;
+    background-color: rosybrown;
+}
+
+/*Modifier le bouton "Créer un compte"*/
+nav .buttons .inscription{
+    background-color: inherit /*<= Prends la couleur du fond du parent*/;
+    margin-right: 10px;
+    color: aliceblue;
+    background-color: royalblue;
+}
+
+
+/* Modification partie header*/
+
+header {
+    margin-top: 40px;
+    /*background-position: center;
+    background-size: 950px 950px ;
+    background-repeat: no-repeat;*/
+}
+
+header h1{
+    text-align: center;
+    font-size: 70px;
+    padding: 150px;
+}
+
+/* 
+Pour appliquer la police d'écriture : 
+font-family: 'Roboto', sans-serif;
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*Ce commentaire caché est une prière pour avoir un bon site à la fin*/
