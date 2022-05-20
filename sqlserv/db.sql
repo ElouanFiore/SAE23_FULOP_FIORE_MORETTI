@@ -20,6 +20,8 @@ CREATE TABLE IF NOT EXISTS `tle`.`clients` (
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB;
 
+CREATE VIEW ServeursReserve (IdServeur, Type, CPU, RAM, STOCKAGE, Loueur, IdClient) AS SELECT serveurs.id, serveurs.type, serveurs.cpu, serveurs.ram, serveurs.stockage, CONCAT(clients.nom, " ", clients.prenom), clients.id FROM serveurs, clients WHERE clients.id=serveurs.client;
+
 INSERT INTO `tle`.`clients` (`email`, `mdp`, `nom`, `prenom`) VALUES ('toto@protonmail.com', SHA1('abcdef'), 'toto', 'TOTO');
 INSERT INTO `tle`.`clients` (`email`, `mdp`, `nom`, `prenom`) VALUES ('tata@gmail.com', SHA1('123456'), 'tata', 'TATA');
 
