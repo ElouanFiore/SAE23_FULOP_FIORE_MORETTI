@@ -1,7 +1,7 @@
 <?php
 require_once("connexion-base.php");
 require_once("func-tableau.php");
-$stmt = $db->query("SELECT * FROM serveurs WHERE client=2");
+$stmt = $db->query("SELECT * FROM serveurs WHERE dispo=1 && client=1");
 $data = $stmt->fetchAll();
 $stmt->closeCursor();
 ?>
