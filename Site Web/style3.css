@@ -10,6 +10,13 @@ body {
     background: url("back.jpg");
 }
 
+/*Pour modifier le petit texte en bas à gauche de la page index.html*/
+footer{
+    position: fixed;
+    bottom: 10px;
+    left: 25px;
+}
+
 body .page{
     margin: 20px 60px;
 }

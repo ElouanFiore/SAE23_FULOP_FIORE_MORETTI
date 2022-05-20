@@ -9,7 +9,7 @@
     </head>
 
     <body>
-        <div id="container">
+        <div id="logz">
             
             <form action="verification.php" method="POST">
                 <h1>Connexion</h1>
@@ -24,12 +24,18 @@
 
                 <?php
 
-                if(isset($_GET['erreur'])){
-                    $err = $_GET['erreur'];
-                    if($err==1 || $err==2)
-                        echo "<p style='color:red'>Utilisateur ou mot de passe incorrect</p>";
-                };
+                    $auth=GetValue($_SESSION,'auth');
 
+                    if ($auth!='ok') { // Pas de variable de session = pas identifié !
+                        $user=GetValue($_REQUEST,'user'); // Envoyé d'un formulaire
+                        $pass=GetValue($_REQUEST,'pass'); // Envoyé d'un formulaire
+                    if (auth($user,$pass)) {
+                        $_SESSION['auth']='ok'; // Sauvegarde dans la session
+                        $_SESSION['user']=$user;
+                    } else {
+                    afficheLoginForm();
+                    }
+                    }
                 ?>
                 
                 

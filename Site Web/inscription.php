@@ -9,7 +9,7 @@
     </head>
 
     <body>
-        <div id="container">
+        <div id="inscription">
             
             <form action="" method="POST"> <!--Rajouter redirection vers script php inscription qui fait les requêtes SQL-->
                 <h1>Inscription</br></h1>
