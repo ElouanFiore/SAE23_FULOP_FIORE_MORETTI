@@ -54,19 +54,15 @@ nav .onglets a:hover{
 }
 
 /*Modifier l'aspect des gros boutons sur la droite */
-nav .buttons button {
+nav .buttons a {
     padding: 13px 20px; /*Padding sert à réduire ou augmenter la taille d'un élément*/
-    color: black;
-    border: none;
     font-family: 'Roboto', sans-serif;
     font-size: 15px;
-    cursor: pointer;
-    outline: none;
+	text-decoration: none; 
 }
 
 /*Modifier le bouton "S'authentifier"*/
 nav .buttons .login{
-    background-color: inherit /*<= Prends la couleur du fond du parent*/;
     margin-right: 10px;
     color: aliceblue;
     background-color: rosybrown;
@@ -74,8 +70,6 @@ nav .buttons .login{
 
 /*Modifier le bouton "Créer un compte"*/
 nav .buttons .inscription{
-    background-color: inherit /*<= Prends la couleur du fond du parent*/;
-    margin-right: 10px;
     color: aliceblue;
     background-color: royalblue;
 }

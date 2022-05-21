@@ -11,7 +11,7 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
 	
 	if ($rows[0][0] == 1) {
 		$_SESSION["username"]=$username;
-		header('Location: test-connexion.php');
+		header('Location: '.$_GET["redirect"]);
 		die();
 	} else {
    		header('Location: login.php?wrong=1');

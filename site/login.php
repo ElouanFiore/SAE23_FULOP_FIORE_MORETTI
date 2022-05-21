@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (isset($_SESSION["username"])) {
-	header('Location: test-connexion.php');
+	header('Location: index.php');
 	die();
 }
 ?>
@@ -15,7 +15,13 @@ if (isset($_SESSION["username"])) {
 </head>
 <body>
 	<div id="logz">
-		<form action="verification.php" method="POST">
+		<?php
+		if (isset($_GET["redirect"])) {
+			printf("<form action='verification.php?redirect=%s' method='POST'>", $_GET["redirect"]);
+		} else {
+			echo "<form action='verification.php?redirect=index.php' method='POST'>";
+		}
+		?>
 			<h1>Connexion</h1>
 			<label><b>E-mail</b></label>
 			<input type="text" placeholder="Entrer le votre e-mail" name="username" required>
