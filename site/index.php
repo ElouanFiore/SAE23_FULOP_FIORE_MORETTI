@@ -8,7 +8,6 @@ session_start();
 	<meta charset="utf-8">
 	<title>Multicast - Accueil</title>
 	<link rel="stylesheet" href="style3.css">
-	<script src="script.js"></script>
 	<script src="jquery-3.6.0.min.js"></script>
 </head>
 

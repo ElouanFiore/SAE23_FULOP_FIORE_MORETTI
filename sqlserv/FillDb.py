@@ -15,9 +15,9 @@ for s in stockage:
         for r in ram:
             for c in cpu:
                 if i % 2 == 0:
-                    servers.append(f"INSERT INTO `tle`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `dispo`) VALUES ('{u}', '{c}', '{r}', '{s}', 1);")
+                    servers.append(f"INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `dispo`) VALUES ('{u}', '{c}', '{r}', '{s}', 1);")
                 else:
-                    servers.append(f"INSERT INTO `tle`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `dispo`) VALUES ('{u}', '{c}', '{r}', '{s}', 0);")
+                    servers.append(f"INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `dispo`) VALUES ('{u}', '{c}', '{r}', '{s}', 0);")
                 i += 1
 
 shuffle(servers)
