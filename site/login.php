@@ -11,15 +11,15 @@ if (isset($_SESSION["username"])) {
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="style2.css" media="screen" type="text/css" />
+	<link rel="stylesheet" href="css/style2.css" media="screen" type="text/css" />
 </head>
 <body>
 	<div id="logz">
 		<?php
 		if (isset($_GET["redirect"])) {
-			printf("<form action='verification.php?redirect=%s' method='POST'>", $_GET["redirect"]);
+			printf("<form action='funcs/verification.php?redirect=%s' method='POST'>", $_GET["redirect"]);
 		} else {
-			echo "<form action='verification.php?redirect=index.php' method='POST'>";
+			echo "<form action='funcs/verification.php?redirect=index.php' method='POST'>";
 		}
 		?>
 			<h1>Connexion</h1>

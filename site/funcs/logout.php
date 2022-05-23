@@ -1,6 +1,7 @@
 <?php
 session_start();
 unset($_SESSION["username"]);
-header('Location: index.php');
+unset($_SESSION["nomPrenom"]);
+header('Location: /index.php');
 die();
 ?>

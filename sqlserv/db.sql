@@ -20,7 +20,8 @@ CREATE TABLE IF NOT EXISTS `multicast`.`clients` (
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB;
 
-CREATE USER admin identified BY "admin";
+CREATE USER `adminMulticast`@`%` IDENTIFIED WITH caching_sha2_password BY 'admin';
+GRANT ALL PRIVILEGES ON `multicast`.* TO `adminMulticast`@`%`;
 
 CREATE VIEW `multicast`.`ServeursReserve` (IdServeur, Type, CPU, RAM, STOCKAGE, Disponible, Loueur, IdClient) AS SELECT serveurs.id, serveurs.type, serveurs.cpu, serveurs.ram, serveurs.stockage, serveurs.dispo, CONCAT(clients.nom, " ", clients.prenom), clients.id FROM serveurs, clients WHERE clients.id=serveurs.client;
 

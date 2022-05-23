@@ -2,9 +2,10 @@
 session_start();
 if (!isset($_SESSION["username"])) {
 	header("Location: login.php?redirect=gestion.php");
+	die();
 }
-require_once("connexion-base.php");
-require_once("func-tableau.php");
+require_once("funcs/connexion-base.php");
+require_once("funcs/func-tableau.php");
 ?>
 
 <!DOCTYPE html>

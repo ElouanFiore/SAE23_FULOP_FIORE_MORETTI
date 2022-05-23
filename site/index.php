@@ -2,13 +2,14 @@
 session_start();
 ?>
 
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="fr">
 <head>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Multicast - Accueil</title>
-	<link rel="stylesheet" href="style3.css">
-	<script src="jquery-3.6.0.min.js"></script>
+	<link rel="stylesheet" href="css/style3.css">
+	<script src="funcs/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -23,12 +24,12 @@ session_start();
 			</div>
 			<div class="buttons">
 			<?php
-			if (isset($_SESSION["username"])) {
-				printf("<p>%s</p>", $_SESSION['username']);
-				echo "<a class='login' href='logout.php'>Se déconnecter</a>";
+			if (isset($_SESSION["nomPrenom"])) {
+				printf("<p>%s</p>", $_SESSION["nomPrenom"]);
+				echo "<button class='login' href='logout.php'>Se déconnecter</button>";
 			} else {
-				echo "<a class='login' href='login.php'>S'authentifier</a>";
-				echo "<a class='inscription' href='inscription.php'>Créer son compte</a>";
+				echo "<button class='login' href='login.php'>S'authentifier</button>";
+				echo "<button class='inscription' href='inscription.php'>Créer son compte</button>";
 			}
 			?>
 			</div>
@@ -44,26 +45,28 @@ session_start();
 	</section>
  </div>
 	
-<!-- Javascript, Jquery, je ne sais pas pourquoi ça ne fonctionne pas autrement	
+<!-- Javascript, Jquery, je ne sais pas pourquoi ça ne fonctionne pas autrement	-->
 <script>
 //Script simple pour faire une redirection vers une autre page, remplace href
 //Pour la page Login
-	$(document).ready(function(){
-		$(".login").click(function(){
-			console.log(window.location.href);
+$(document).ready(function(){
+	$(".login").click(function(){
+		if (this.innerHTML == "Se déconnecter") {
+			window.location.href = "funcs/logout.php";
+		} else {
 			window.location.href = "login.php";
-		});
+		}
 	});
+});
 	
 //Pour la page Inscription
 $(document).ready(function(){
-		$(".inscription").click(function(){
-			console.log(window.location.href);
-			window.location.href = "inscription.php";
-		});
+	$(".inscription").click(function(){
+		window.location.href = "inscription.php";
 	});
+});
 </script>
 </body>
--->
+
 <!--The cloud is just someone else's computer-->
 </html>

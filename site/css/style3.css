@@ -7,7 +7,7 @@ body {
     padding: 0%;
     margin: 0%;
     color:rosybrown;
-    background: url("back.jpg");
+ 	background-image:url("../images/back.jpg");
 }
 
 /*Pour modifier le petit texte en bas à gauche de la page index.html*/
@@ -29,13 +29,12 @@ nav {
     position: sticky;
     top: 0;
     /*background-color: rgb(144, 144, 255);*/
-    padding: 10px 0px;
 }
 
 nav .onglets{
     display: flex;
     flex-wrap: wrap;
-    margin-top: 5px;
+	margin-bottom: 1em;
 }
 
 nav .onglets a {
@@ -49,16 +48,17 @@ nav .onglets a {
 
 nav .onglets a:hover{
     background-color: aliceblue;
-    font-weight: bold;
     color: royalblue;
 }
 
 /*Modifier l'aspect des gros boutons sur la droite */
-nav .buttons a {
+nav .buttons button {
     padding: 13px 20px; /*Padding sert à réduire ou augmenter la taille d'un élément*/
     font-family: 'Roboto', sans-serif;
     font-size: 15px;
 	text-decoration: none; 
+	border: none;
+	cursor: pointer;
 }
 
 /*Modifier le bouton "S'authentifier"*/
@@ -78,7 +78,7 @@ nav .buttons .inscription{
 /* Modification partie header*/
 
 header {
-    margin-top: 40px;
+	margin-top: 12vw;
     /*background-position: center;
     background-size: 950px 950px ;
     background-repeat: no-repeat;*/
@@ -86,8 +86,8 @@ header {
 
 header h1{
     text-align: center;
-    font-size: 70px;
-    padding: 150px;
+    font-size: 3em;
+    /*padding: 150px;*/
 }
 
 /* 
