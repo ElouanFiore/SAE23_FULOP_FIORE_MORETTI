@@ -90,6 +90,21 @@ header h1{
     /*padding: 150px;*/
 }
 
+
+/*Modifier le bouton user*/
+nav .buttons .user {
+    margin-right: 10px;
+    color: aliceblue;
+    background-color: rosybrown;
+}
+
+/*Modifier le bouton "Deconnexion"*/
+nav .buttons .deconnexion {
+    color: aliceblue;
+    background-color: royalblue;
+}
+
+
 /* 
 Pour appliquer la police d'écriture : 
 font-family: 'Roboto', sans-serif;

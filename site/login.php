@@ -13,6 +13,15 @@ if (isset($_SESSION["username"])) {
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="css/style2.css" media="screen" type="text/css" />
 </head>
+
+<nav>
+
+	<div class="onglets">
+        <a href="index.php">🏠 Accueil</a>
+    </div>
+
+ </nav>
+
 <body>
 	<div id="logz">
 		<?php
@@ -35,7 +44,11 @@ if (isset($_GET["wrong"])) {
 	}
 }
 ?>
-			<p>Multicast ~ Votre hébergeur</p>
+
+		<p>Multicast ~ Votre hébergeur</p>
+		<p>Pas encore inscrit ? <a href="inscription.php">Cliquez ici.</a></p>
+
+		
 		</form>
 	</div>
 </body>

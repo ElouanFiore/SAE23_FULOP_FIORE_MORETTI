@@ -8,6 +8,14 @@
        <link rel="stylesheet" href="css/style2.css" media="screen" type="text/css" />
     </head>
 
+    <nav>
+
+        <div class="onglets">
+            <a href="index.php">🏠 Accueil</a>
+        </div>
+
+    </nav>
+
     <body>
         <div id="inscription">
             

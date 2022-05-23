@@ -24,14 +24,20 @@ session_start();
 			</div>
 			<div class="buttons">
 			<?php
-			if (isset($_SESSION["nomPrenom"])) {
-				printf("<p>%s</p>", $_SESSION["nomPrenom"]);
-				echo "<button class='login' href='logout.php'>Se déconnecter</button>";
+			if(isset($_SESSION['nomPrenom'])){
+				$user = $_SESSION['nomPrenom'];
+				echo"<div class='buttons'>Bonjour $user, vous êtes connecté";
+				echo"<button class='user'>$user</button>";
+				echo"<button class='deconnexion'>Se déconnecter</button>";
+				echo"</div>";
 			} else {
-				echo "<button class='login' href='login.php'>S'authentifier</button>";
-				echo "<button class='inscription' href='inscription.php'>Créer son compte</button>";
-			}
+				printf("<div class='buttons'>");
+				printf("<button class='login'>S'authentifier</button>");
+				printf("<button class='inscription'>Créer son compte</button>");
+				printf("</div>");
+			};
 			?>
+			
 			</div>
 		</nav>
 
@@ -51,11 +57,7 @@ session_start();
 //Pour la page Login
 $(document).ready(function(){
 	$(".login").click(function(){
-		if (this.innerHTML == "Se déconnecter") {
-			window.location.href = "funcs/logout.php";
-		} else {
-			window.location.href = "login.php";
-		}
+		window.location.href = "login.php";
 	});
 });
 	
@@ -63,6 +65,20 @@ $(document).ready(function(){
 $(document).ready(function(){
 	$(".inscription").click(function(){
 		window.location.href = "inscription.php";
+	});
+});
+
+//Pour le bouton User
+$(document).ready(function(){
+	$(".user").click(function(){
+		window.location.href = "user.php";
+	});
+});
+
+//Pour le bouton déconnexion
+$(document).ready(function(){
+	$(".deconnexion").click(function(){
+		window.location.href = "funcs/logout.php";
 	});
 });
 </script>
