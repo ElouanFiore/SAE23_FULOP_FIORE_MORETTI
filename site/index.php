@@ -26,15 +26,11 @@ session_start();
 			<?php
 			if(isset($_SESSION['nomPrenom'])){
 				$user = $_SESSION['nomPrenom'];
-				echo"<div class='buttons'>Bonjour $user, vous êtes connecté";
 				echo"<button class='user'>$user</button>";
 				echo"<button class='deconnexion'>Se déconnecter</button>";
-				echo"</div>";
 			} else {
-				printf("<div class='buttons'>");
 				printf("<button class='login'>S'authentifier</button>");
 				printf("<button class='inscription'>Créer son compte</button>");
-				printf("</div>");
 			};
 			?>
 			

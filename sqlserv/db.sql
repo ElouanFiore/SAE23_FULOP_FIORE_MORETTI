@@ -1,6 +1,10 @@
-CREATE DATABASE IF NOT EXISTS `multicast`;
+DROP DATABASE IF EXISTS `multicast`;
+DROP USER IF EXISTS `adminMulticast`;
+DROP USER IF EXISTS `web`;
 
-CREATE TABLE IF NOT EXISTS `multicast`.`serveurs` (
+CREATE DATABASE `multicast`;
+
+CREATE TABLE `multicast`.`serveurs` (
   `id` int NOT NULL AUTO_INCREMENT,
   `type` varbinary(10) NOT NULL,
   `cpu` int NOT NULL,
@@ -11,7 +15,7 @@ CREATE TABLE IF NOT EXISTS `multicast`.`serveurs` (
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `multicast`.`clients` (
+CREATE TABLE `multicast`.`clients` (
   `id` int NOT NULL AUTO_INCREMENT,
   `email` varbinary(50) NOT NULL,
   `mdp` varbinary(50) NOT NULL,
@@ -20,15 +24,18 @@ CREATE TABLE IF NOT EXISTS `multicast`.`clients` (
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB;
 
-CREATE USER `adminMulticast`@`%` IDENTIFIED WITH caching_sha2_password BY 'admin';
-GRANT ALL PRIVILEGES ON `multicast`.* TO `adminMulticast`@`%`;
+CREATE USER 'adminMulticast'@'%' IDENTIFIED WITH caching_sha2_password BY 'admin';
+GRANT ALL PRIVILEGES ON `multicast`.* TO 'adminMulticast'@'%';
 
-CREATE VIEW `multicast`.`ServeursReserve` (IdServeur, Type, CPU, RAM, STOCKAGE, Disponible, Loueur, IdClient) AS SELECT serveurs.id, serveurs.type, serveurs.cpu, serveurs.ram, serveurs.stockage, serveurs.dispo, CONCAT(clients.nom, " ", clients.prenom), clients.id FROM serveurs, clients WHERE clients.id=serveurs.client;
+CREATE USER 'web'@'%' IDENTIFIED WITH caching_sha2_password BY 'zj%b6zube^&ajd';
+GRANT SELECT, INSERT, UPDATE, DELETE ON `multicast`.* TO 'web'@'%';
 
-CREATE VIEW `multicast`.`VueClient` (IdServeur, Type, CPU, RAM, STOCKAGE, mail) AS SELECT serveurs.id, serveurs.type, serveurs.cpu, serveurs.ram, serveurs.stockage, clients.email FROM serveurs, clients  WHERE serveurs.client=clients.id && serveurs.dispo=1;
+CREATE VIEW `multicast`.`ServeursReserve` (IdServeur, Type, CPU, RAM, STOCKAGE, Disponible, Loueur, IdClient) AS SELECT serveurs.id, serveurs.type, serveurs.cpu, serveurs.ram, serveurs.stockage, serveurs.dispo, CONCAT(clients.nom, " ", clients.prenom), clients.id FROM `multicast`.`serveurs`, `multicast`.`clients` WHERE clients.id=serveurs.client;
 
-INSERT INTO `multicast`.`clients` (`email`, `mdp`, `nom`, `prenom`) VALUES ('toto@protonmail.com', SHA1('abcdef'), 'toto', 'TOTO');
-INSERT INTO `multicast`.`clients` (`email`, `mdp`, `nom`, `prenom`) VALUES ('tata@gmail.com', SHA1('123456'), 'tata', 'TATA');
+CREATE VIEW `multicast`.`VueClient` (IdServeur, Type, CPU, RAM, STOCKAGE, mail) AS SELECT serveurs.id, serveurs.type, serveurs.cpu, serveurs.ram, serveurs.stockage, clients.email FROM `multicast`.`serveurs`, `multicast`.`clients`  WHERE serveurs.client=clients.id && serveurs.dispo=1;
+
+INSERT INTO `multicast`.`clients` (`email`, `mdp`, `nom`, `prenom`) VALUES ('toto@protonmail.com', SHA1('abcdef'), 'toto', 'toto');
+INSERT INTO `multicast`.`clients` (`email`, `mdp`, `nom`, `prenom`) VALUES ('tata@gmail.com', SHA1('123456'), 'tata', 'tata');
 
 INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `dispo`) VALUES ('STOCKAGE', '8', '128', '250', 1);
 INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `dispo`) VALUES ('WEB', '8', '256', '2000', 1);
@@ -111,3 +118,10 @@ INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `dispo`) V
 INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `dispo`) VALUES ('JEU', '16', '256', '250', 0);
 INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `dispo`) VALUES ('WEB', '16', '256', '500', 1);
 INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `dispo`) VALUES ('STOCKAGE', '16', '128', '2000', 0);
+
+UPDATE `multicast`.`serveurs` SET `client` = '2' WHERE `serveurs`.`id` = 1;
+UPDATE `multicast`.`serveurs` SET `client` = '2' WHERE `serveurs`.`id` = 9;
+UPDATE `multicast`.`serveurs` SET `client` = '1' WHERE `serveurs`.`id` = 4;
+UPDATE `multicast`.`serveurs` SET `client` = '1' WHERE `serveurs`.`id` = 8;
+UPDATE `multicast`.`serveurs` SET `client` = '1' WHERE `serveurs`.`id` = 12;
+UPDATE `multicast`.`serveurs` SET `client` = '1' WHERE `serveurs`.`id` = 20;

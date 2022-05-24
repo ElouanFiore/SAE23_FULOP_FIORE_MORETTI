@@ -1,9 +1,10 @@
 <?php
 session_start();
+require("connexion-base.php");
 if(isset($_POST['username']) && isset($_POST['password'])) {
-	$username = $_POST['username'];
-	$password = $_POST['password'];
-	$db = new PDO("mysql:host=sql;charset=utf8;dbname=multicast", "root", "root");
+	$username = htmlspecialchars($_POST['username']);
+	$password = htmlspecialchars($_POST['password']);
+
 	$stmt = $db->prepare("SELECT nom, prenom FROM clients WHERE email=:u && mdp=SHA1(:p);");
 	$stmt->execute(array("u"=>$username, "p"=>$password));
 	$rows=$stmt->fetchAll();
@@ -11,15 +12,15 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
 	
 	if (count($rows) == 1) {
 		$_SESSION["username"] = $username;
-		$_SESSION["nomPrenom"] = $rows[0]["nom"]." ".$rows[0]["prenom"];
-		header('Location: /'.$_GET["redirect"]);
+		$_SESSION["nomPrenom"] = $rows[0]["prenom"]." ".strtoupper($rows[0]["nom"]);
+		header('Location: ../'.$_GET["redirect"]);
 		die();
 	} else {
-   		header('Location: /login.php?wrong=1');
+   		header('Location: ../login.php?err=1');
 		die();
 	}
 } else {
-	header('Location: /login.php');
+	header('Location: ../login.php');
 	die();
 }
 ?>

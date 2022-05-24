@@ -2,60 +2,60 @@
 
 /*Modifier le body en général*/
 body {
-    font-family: 'Roboto', sans-serif;
-    /*background-color: inherit;*/
-    padding: 0%;
-    margin: 0%;
-    color:rosybrown;
+	font-family: 'Roboto', sans-serif;
+	/*background-color: inherit;*/
+	padding: 0%;
+	margin: 0%;
+	color:rosybrown;
  	background-image:url("../images/back.jpg");
 }
 
 /*Pour modifier le petit texte en bas à gauche de la page index.html*/
 footer{
-    position: fixed;
-    bottom: 10px;
-    left: 25px;
+	position: fixed;
+	bottom: 10px;
+	left: 25px;
 }
 
 body .page{
-    margin: 20px 60px;
+	margin: 20px 60px;
 }
 
 /*Modifier l'aspect des boutons des différentes catégories du site*/
 nav {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    /*background-color: rgb(144, 144, 255);*/
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	position: sticky;
+	top: 0;
+	/*background-color: rgb(144, 144, 255);*/
 }
 
 nav .onglets{
-    display: flex;
-    flex-wrap: wrap;
+	display: flex;
+	flex-wrap: wrap;
 	margin-bottom: 1em;
 }
 
 nav .onglets a {
-    margin-right: 20px /*Margin sert à réduire ou augmenter l'espace invisible entre des éléments*/;
-    cursor: pointer;
-    text-decoration: none;
-    color: black;
-    font-size: 21px;
-    padding: 0 15px;
+	margin-right: 20px /*Margin sert à réduire ou augmenter l'espace invisible entre des éléments*/;
+	cursor: pointer;
+	text-decoration: none;
+	color: black;
+	font-size: 21px;
+	padding: 0 15px;
 }
 
 nav .onglets a:hover{
-    background-color: aliceblue;
-    color: royalblue;
+	background-color: aliceblue;
+	color: royalblue;
 }
 
 /*Modifier l'aspect des gros boutons sur la droite */
 nav .buttons button {
-    padding: 13px 20px; /*Padding sert à réduire ou augmenter la taille d'un élément*/
-    font-family: 'Roboto', sans-serif;
-    font-size: 15px;
+	padding: 13px 20px; /*Padding sert à réduire ou augmenter la taille d'un élément*/
+	font-family: 'Roboto', sans-serif;
+	font-size: 15px;
 	text-decoration: none; 
 	border: none;
 	cursor: pointer;
@@ -63,15 +63,15 @@ nav .buttons button {
 
 /*Modifier le bouton "S'authentifier"*/
 nav .buttons .login{
-    margin-right: 10px;
-    color: aliceblue;
-    background-color: rosybrown;
+	margin-right: 10px;
+	color: aliceblue;
+	background-color: royalblue;
 }
 
 /*Modifier le bouton "Créer un compte"*/
 nav .buttons .inscription{
-    color: aliceblue;
-    background-color: royalblue;
+	color: aliceblue;
+	background-color: rosybrown;
 }
 
 
@@ -79,29 +79,29 @@ nav .buttons .inscription{
 
 header {
 	margin-top: 12vw;
-    /*background-position: center;
-    background-size: 950px 950px ;
-    background-repeat: no-repeat;*/
+	/*background-position: center;
+	background-size: 950px 950px ;
+	background-repeat: no-repeat;*/
 }
 
 header h1{
-    text-align: center;
-    font-size: 3em;
-    /*padding: 150px;*/
+	text-align: center;
+	font-size: 3em;
+	/*padding: 150px;*/
 }
 
 
 /*Modifier le bouton user*/
 nav .buttons .user {
-    margin-right: 10px;
-    color: aliceblue;
-    background-color: rosybrown;
+	margin-right: 10px;
+	color: aliceblue;
+	background-color: royalblue;
 }
 
 /*Modifier le bouton "Deconnexion"*/
 nav .buttons .deconnexion {
-    color: aliceblue;
-    background-color: royalblue;
+	color: aliceblue;
+	background-color: rosybrown;
 }
 
 

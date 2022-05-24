@@ -1,5 +1,3 @@
-En construction
-
 <?php
 session_start();
 if (!isset($_SESSION["username"])) {
@@ -14,11 +12,17 @@ require_once("funcs/func-tableau.php");
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Gestion des Serveurs</title>
+	<title>Gestion des Serveurs</title>
+ 	<link rel="stylesheet" href="css/tarifs.css">
+	<script src="funcs/func-tableau.js"></script>
 </head>
 <body>
+<div id="table"></div>
+<script>
 <?php
 tableau($db, "SELECT IdServeur, Type, CPU, RAM, STOCKAGE FROM `VueClient` WHERE mail='".$_SESSION["username"]."'");
 ?>
+Table(table);
+</script>
 </body>
 </html>

@@ -5,6 +5,7 @@ if (isset($_SESSION["username"])) {
 	die();
 }
 ?>
+<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -14,42 +15,41 @@ if (isset($_SESSION["username"])) {
 	<link rel="stylesheet" href="css/style2.css" media="screen" type="text/css" />
 </head>
 
+<body>
 <nav>
-
 	<div class="onglets">
         <a href="index.php">🏠 Accueil</a>
     </div>
-
- </nav>
-
-<body>
-	<div id="logz">
-		<?php
-		if (isset($_GET["redirect"])) {
-			printf("<form action='funcs/verification.php?redirect=%s' method='POST'>", $_GET["redirect"]);
-		} else {
-			echo "<form action='funcs/verification.php?redirect=index.php' method='POST'>";
-		}
-		?>
-			<h1>Connexion</h1>
-			<label><b>E-mail</b></label>
-			<input type="text" placeholder="Entrer le votre e-mail" name="username" required>
-			<label><b>Mot de passe</b></label>
-			<input type="password" placeholder="Entrer le mot de passe" name="password" required>
-			<input type="submit" id='submit' value='LOGIN' >
-<?php
-if (isset($_GET["wrong"])) {
-	if ($_GET["wrong"] == 1) {
-		echo "<h5 style='color: red;'>Mot de passe ou E-mail incorrect</h5>";
+</nav>
+<div id="logz">
+	<?php
+	if (isset($_GET["redirect"])) {
+		printf("<form action='funcs/verif-connexion.php?redirect=%s' method='POST'>", $_GET["redirect"]);
+	} else {
+		echo "<form action='funcs/verif-connexion.php?redirect=index.php' method='POST'>";
 	}
-}
-?>
+	?>
 
-		<p>Multicast ~ Votre hébergeur</p>
-		<p>Pas encore inscrit ? <a href="inscription.php">Cliquez ici.</a></p>
+	<h1>Connexion</h1>
 
-		
-		</form>
-	</div>
+	<label><b>E-mail</b></label>
+	<input type="email" placeholder="Entrer le votre e-mail" name="username" required>
+
+	<label><b>Mot de passe</b></label>
+	<input type="password" placeholder="Entrer le mot de passe" name="password" required>
+
+	<input type="submit" id='submit' value="Se connecter">
+
+	<?php
+	if (isset($_GET["err"])) {
+		if ($_GET["err"] == 1) {
+			echo "<h4 style='color: red;'>Mot de passe ou E-mail incorrect</h4>";
+		}
+	}
+	?>
+	<p>Pas encore inscrit ? <a href="inscription.php">Cliquez ici.</a></p>
+	<p>Multicast ~ Votre hébergeur</p>
+	</form>
+</div>
 </body>
 </html>
