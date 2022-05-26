@@ -42,12 +42,23 @@ if (isset($_SESSION["username"])) {
 
 	<?php
 	if (isset($_GET["err"])) {
-		if ($_GET["err"] == 1) {
-			echo "<h4 style='color: red;'>Mot de passe ou E-mail incorrect</h4>";
+		switch($_GET["err"]) {
+			case "inexistant";
+				echo "<h4 style='color: red;'>Mot de passe ou E-mail incorrect</h4>";
+			break;
+			case "supprime";
+				echo "<h4 style='color: red;'>Ce compte à été supprimé</h4>";
+			break;
 		}
 	}
+
+	if (isset($_GET["redirect"])) {
+		printf("<p>Pas encore inscrit ? <a href='inscription.php?redirect=%s'>Cliquez ici.</a></p>", $_GET["redirect"]);
+	} else {
+		echo "<p>Pas encore inscrit ? <a href='inscription.php'>Cliquez ici.</a></p>";
+	}
 	?>
-	<p>Pas encore inscrit ? <a href="inscription.php">Cliquez ici.</a></p>
+	
 	<p>Multicast ~ Votre hébergeur</p>
 	</form>
 </div>

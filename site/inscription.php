@@ -1,14 +1,18 @@
+<?php
+session_start();
+if (isset($_SESSION["username"])) {
+	header('Location: index.php');
+	die();
+}
+?>
 <html>
-
-	<head>
-	   <meta charset="utf-8">
-	   <link rel="preconnect" href="https://fonts.googleapis.com">
-	   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-	   <link rel="stylesheet" href="css/style2.css" media="screen" type="text/css" />
-	</head>
-
-	
+<head>
+   <meta charset="utf-8">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="css/style2.css" media="screen" type="text/css" />
+</head>
 <body>
 <nav>
 <div class="onglets">
@@ -24,8 +28,8 @@
 		echo "<form action='funcs/verif-inscription.php?redirect=index.php' method='POST'>";
 	}
 	?>
-	<h1>Inscription</br></h1>
-	<h3>Bienvenue sur notre plateforme d'hébergement 😃</h3></br>
+	<h1>Inscription</h1>
+	<h3>Bienvenue sur notre plateforme d'hébergement 😃</h3>
 
 	<label><b>Nom :</b></label>
 	<input type="text" placeholder="Entrez votre nom" name="nom" required>
@@ -64,8 +68,16 @@
 			case "email";
 				echo "<h4 style='color: red;'>L'E-mail est invalide</h4>";
 			break;
-
+			case "inactif";
+				echo "<h4 style='color: red;'>L'utilisateur à déjà été supprimé</h4>";
+			break;
 		}
+	}
+
+	if (isset($_GET["redirect"])) {
+		printf("<p>Vous avez déjà un compte ? <a href='login.php?redirect=%s'>Cliquez ici.</a></p>", $_GET["redirect"]);
+	} else {
+		echo "<p>Vous avez déjà un compte ? <a href='login.php'>Cliquez ici.</a></p>";
 	}
 	?>
 				

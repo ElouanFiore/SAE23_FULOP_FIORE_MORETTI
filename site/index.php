@@ -1,7 +1,6 @@
 <?php 
 session_start();
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -67,7 +66,7 @@ $(document).ready(function(){
 //Pour le bouton User
 $(document).ready(function(){
 	$(".user").click(function(){
-		window.location.href = "user.php";
+		window.location.href = "compte.php";
 	});
 });
 

@@ -21,6 +21,7 @@ CREATE TABLE `multicast`.`clients` (
   `mdp` varbinary(50) NOT NULL,
   `nom` varbinary(50) NOT NULL,
   `prenom` varbinary(50) NOT NULL,
+  `actif` boolean NOT NULL DEFAULT 1, 
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB;
 
