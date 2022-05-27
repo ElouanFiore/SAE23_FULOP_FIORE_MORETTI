@@ -53,10 +53,10 @@ if (!isset($_SESSION["username"])) {
 				echo "<h4 style='color: red;'>Les nouveaux mots de passes ne correspondent pas</h4>";
 			break;
 			case "utilise";
-				echo "<h4 style='color: red;'>Cet adresse e-mail est déjà utilisé</h4>";
+				echo "<h4 style='color: red;'>Cette adresse e-mail est déjà utilisé</h4>";
 			break;
 			case "invalide";
-				echo "<h4 style='color: red;'>Cet adresse e-mail est invalide</h4>";
+				echo "<h4 style='color: red;'>Cette adresse e-mail est invalide</h4>";
 			break;
 		}
 	}

@@ -23,12 +23,11 @@ session_start();
 			</div>
 			<div class="buttons">
 			<?php
-			if(isset($_SESSION['username']) && $_SESSION["username"]=='admin'){
-				echo"<div class='buttons'>";
+			if(isset($_SESSION['username']) && $_SESSION["nomPrenom"] == 'admin'){
 				echo"<button class='admin'>Administration</button>";
-				echo"</div>";
+				echo"<button class='deconnexion'>Se déconnecter</button>";
 			} else if(isset($_SESSION['username'])) {
-				$user = $_SESSION['username'];
+				$user = $_SESSION['nomPrenom'];
 				echo"<button class='user'>$user</button>";
 				echo"<button class='deconnexion'>Se déconnecter</button>";
 			} else {

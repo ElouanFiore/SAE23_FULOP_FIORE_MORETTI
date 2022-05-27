@@ -106,8 +106,9 @@ nav .buttons .deconnexion {
 
 /*Modifier le bouton "Administration"*/
 nav .buttons .admin {
-    background-color: rosybrown;
+	background-color: royalblue;
     color: aliceblue;
+	margin-right: 10px;
 }
 
 /*Css location*/

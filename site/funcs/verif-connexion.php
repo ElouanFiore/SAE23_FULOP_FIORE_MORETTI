@@ -24,12 +24,17 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
 		die();
 	}
 
-	$nom = strtoupper($rows[0]["nom"]);
-	$pre = $rows[0]["prenom"];
-	$lenpre = strlen($rows[0]["prenom"]);
-	$preformat = strtoupper($pre[0]).substr($pre, 1, $lenpre);
+	if ($rows[0]["nom"] !== "admin") {
+		$nom = strtoupper($rows[0]["nom"]);
+		$pre = $rows[0]["prenom"];
+		$lenpre = strlen($rows[0]["prenom"]);
+		$preformat = strtoupper($pre[0]).substr($pre, 1, $lenpre);
+		$nomprenom = $preformat." ".$nom;
+	} else {
+		$nomprenom = "admin";
+	}
 
-	$_SESSION["nomPrenom"] = $preformat." ".$nom;
+	$_SESSION["nomPrenom"] = $nomprenom;
 	$_SESSION["username"] = $username;
 		
 	if ($get !== "") {

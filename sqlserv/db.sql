@@ -37,6 +37,7 @@ CREATE VIEW `multicast`.`VueClient` (IdServeur, Type, CPU, RAM, STOCKAGE, mail) 
 
 INSERT INTO `multicast`.`clients` (`email`, `mdp`, `nom`, `prenom`) VALUES ('toto@protonmail.com', SHA1('abcdef'), 'toto', 'toto');
 INSERT INTO `multicast`.`clients` (`email`, `mdp`, `nom`, `prenom`) VALUES ('tata@gmail.com', SHA1('123456'), 'tata', 'tata');
+INSERT INTO `multicast`.`clients` (`email`, `mdp`, `nom`, `prenom`) VALUES ('admin@admin.fr', SHA1('admin'), 'admin', 'admin');
 
 INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `dispo`) VALUES ('STOCKAGE', '8', '128', '250', 1);
 INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `dispo`) VALUES ('WEB', '8', '256', '2000', 1);
