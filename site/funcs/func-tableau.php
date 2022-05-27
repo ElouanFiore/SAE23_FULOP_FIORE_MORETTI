@@ -3,26 +3,28 @@ function tableau($db, $query) {
 	$stmt = $db->query($query);
 	$data = $stmt->fetchAll();
 	$stmt->closeCursor();
-	
+
 	if (count($data) > 0) {
-		echo "<table>";
+		$table = "var table = {header:[";
 		foreach(array_keys($data[0]) as $i=>$key) {
 			if (is_string($key)) {
-				printf("<th>%s</th>", $key);
+				$table = $table."\"".$key."\",";
 			}
 		}
+		$table = $table."],row:[";
 		foreach($data as $i=>$row) {
-			echo "<tr>";
+			$table = $table."[";
 			foreach ($row as $j=>$val) {
 				if (is_string($j)) {
-					printf("<td>%s</td>", $val);
+					$table = $table."\"".$val."\",";
 				}
 			}
-			echo "</tr>\n";
+			$table = $table."],";
 		}
-		echo "</table>";
+		$table = $table."]};";
 	} else {
-	    echo "<h1>IL Y A RIEN BATARD</h1>";
+		$table = "var table = {};";
 	}
+	echo $table;
 }
 ?>

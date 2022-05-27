@@ -1,7 +1,6 @@
 <?php 
 session_start();
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -30,15 +29,11 @@ session_start();
 				echo"</div>";
 			} else if(isset($_SESSION['username'])) {
 				$user = $_SESSION['username'];
-				echo"<div class='buttons'>Bonjour $user, vous êtes connecté";
 				echo"<button class='user'>$user</button>";
 				echo"<button class='deconnexion'>Se déconnecter</button>";
-				echo"</div>";
 			} else {
-			  printf("<div class='buttons'>");
-			  printf("<button class='login'>S'authentifier</button>");
-			  printf("<button class='inscription'>Créer son compte</button>");
-			  printf("</div>");
+				printf("<button class='login'>S'authentifier</button>");
+				printf("<button class='inscription'>Créer son compte</button>");
 			};
 			?>
 			</div>
@@ -78,7 +73,7 @@ $(document).ready(function(){
 //Pour le bouton User
 $(document).ready(function(){
 	$(".user").click(function(){
-		window.location.href = "user.php";
+		window.location.href = "compte.php";
 	});
 });
 
