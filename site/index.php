@@ -24,20 +24,23 @@ session_start();
 			</div>
 			<div class="buttons">
 			<?php
-			if(isset($_SESSION['nomPrenom'])){
-				$user = $_SESSION['nomPrenom'];
+			if(isset($_SESSION['username']) && $_SESSION["username"]=='admin'){
+				echo"<div class='buttons'>";
+				echo"<button class='admin'>Administration</button>";
+				echo"</div>";
+			} else if(isset($_SESSION['username'])) {
+				$user = $_SESSION['username'];
 				echo"<div class='buttons'>Bonjour $user, vous êtes connecté";
 				echo"<button class='user'>$user</button>";
 				echo"<button class='deconnexion'>Se déconnecter</button>";
 				echo"</div>";
 			} else {
-				printf("<div class='buttons'>");
-				printf("<button class='login'>S'authentifier</button>");
-				printf("<button class='inscription'>Créer son compte</button>");
-				printf("</div>");
+			  printf("<div class='buttons'>");
+			  printf("<button class='login'>S'authentifier</button>");
+			  printf("<button class='inscription'>Créer son compte</button>");
+			  printf("</div>");
 			};
 			?>
-			
 			</div>
 		</nav>
 
@@ -57,7 +60,11 @@ session_start();
 //Pour la page Login
 $(document).ready(function(){
 	$(".login").click(function(){
-		window.location.href = "login.php";
+		if (this.innerHTML == "Se déconnecter") {
+			window.location.href = "funcs/logout.php";
+		} else {
+			window.location.href = "login.php";
+		}
 	});
 });
 	
@@ -81,6 +88,15 @@ $(document).ready(function(){
 		window.location.href = "funcs/logout.php";
 	});
 });
+
+//Pour le bouton administration
+$(document).ready(function(){
+	$(".admin").click(function(){
+		window.location.href = "admin.php";
+	});
+});
+
+
 </script>
 </body>
 

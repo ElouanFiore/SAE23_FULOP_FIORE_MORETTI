@@ -34,7 +34,7 @@ nav {
 nav .onglets{
     display: flex;
     flex-wrap: wrap;
-	margin-bottom: 1em;
+    margin-top: 5px;
 }
 
 nav .onglets a {
@@ -95,14 +95,83 @@ header h1{
 nav .buttons .user {
     margin-right: 10px;
     color: aliceblue;
-    background-color: rosybrown;
+    background-color: royalblue;
 }
 
 /*Modifier le bouton "Deconnexion"*/
 nav .buttons .deconnexion {
     color: aliceblue;
-    background-color: royalblue;
+    background-color: rosybrown;
 }
+
+/*Modifier le bouton "Administration"*/
+nav .buttons .admin {
+    background-color: rosybrown;
+    color: aliceblue;
+}
+
+/*Css location*/
+
+select {
+    width: 150px;
+}
+
+#loc {
+	margin-top: 5;
+    text-align: center;
+}
+
+#loc h1{
+    text-align: top;
+    font-size: 3em;
+}
+
+.anim {
+    text-align: center;
+    color: black;
+    margin-top: 85px;
+}
+
+#type-f {
+    animation-duration: 2s;
+    animation-name: stock;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+
+}
+
+#cpu-f {
+    animation-duration: 2s;
+    animation-name: stock;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#ram-f {
+    animation-duration: 2s;
+    animation-name: stock;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    
+}
+
+@keyframes stock {
+
+    from {
+        left: 1px;
+        width: 95%;
+    }
+
+    to {
+        left: 3px;
+        width: 105%;
+    }
+}
+
+
+
+
+
 
 
 /* 
