@@ -33,7 +33,7 @@ if (isset($_SESSION["username"])) {
 	<h1>Connexion</h1>
 
 	<label><b>E-mail</b></label>
-	<input type="email" placeholder="Entrer le votre e-mail" name="username" required>
+	<input type="text" placeholder="Entrer le votre e-mail" name="username" required>
 
 	<label><b>Mot de passe</b></label>
 	<input type="password" placeholder="Entrer le mot de passe" name="password" required>
@@ -44,10 +44,13 @@ if (isset($_SESSION["username"])) {
 	if (isset($_GET["err"])) {
 		switch($_GET["err"]) {
 			case "inexistant";
-				echo "<h4 style='color: red;'>Mot de passe ou E-mail incorrect</h4>";
+				echo "<h4 style='color: red;'>Mot de passe ou adrresse e-mail incorrect</h4>";
 			break;
 			case "supprime";
 				echo "<h4 style='color: red;'>Ce compte à été supprimé</h4>";
+			break;
+			case "mail";
+				echo "<h4 style='color: red;'>L'adresse e-mail n'est pas valide</h4>";
 			break;
 		}
 	}

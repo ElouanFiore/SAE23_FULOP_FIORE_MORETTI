@@ -23,7 +23,7 @@ session_start();
 			</div>
 			<div class="buttons">
 			<?php
-			if(isset($_SESSION['username']) && $_SESSION["nomPrenom"] == 'admin'){
+			if(isset($_SESSION['username']) && $_SESSION['username'] == 'admin'){
 				echo"<button class='admin'>Administration</button>";
 				echo"<button class='deconnexion'>Se déconnecter</button>";
 			} else if(isset($_SESSION['username'])) {

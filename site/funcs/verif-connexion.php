@@ -5,33 +5,36 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
 	$username = htmlspecialchars($_POST['username']);
 	$password = htmlspecialchars($_POST['password']);
 
-	$stmt = $db->prepare("SELECT nom, prenom, actif FROM clients WHERE email=:u && mdp=SHA1(:p);");
-	$stmt->execute(array("u"=>$username, "p"=>$password));
-	$rows=$stmt->fetchAll();
-	$stmt->closeCursor();
-	
 	if (isset($_GET["redirect"])) {
 		$get = "&redirect=".$_GET["redirect"];
 	} else {
 		$get = "";
 	}
 
-	if (count($rows) != 1) {
+	$stmt = $db->prepare("SELECT id, nom, prenom, actif FROM clients WHERE email=:u && mdp=SHA1(:p);");
+	$stmt->execute(array("u"=>$username, "p"=>$password));
+	$rows=$stmt->fetchAll();
+	$stmt->closeCursor();
+	
+	if (!filter_var($username, FILTER_VALIDATE_EMAIL) && $username !== "admin") {
+   		header('Location: ../login.php?err=mail'.$get);
+		die();
+	} else if (count($rows) != 1) {
    		header('Location: ../login.php?err=inexistant'.$get);
 		die();
 	} else if ($rows[0]["actif"] == 0) {
-   		header('Location: ../login.php?err=supprime'.$get);
+		header('Location: ../login.php?err=supprime'.$get);
 		die();
 	}
 
-	if ($rows[0]["nom"] !== "admin") {
+	if ($rows[0]["id"] == 1) {
+		$nomprenom = "admin";
+	} else {
 		$nom = strtoupper($rows[0]["nom"]);
 		$pre = $rows[0]["prenom"];
 		$lenpre = strlen($rows[0]["prenom"]);
 		$preformat = strtoupper($pre[0]).substr($pre, 1, $lenpre);
 		$nomprenom = $preformat." ".$nom;
-	} else {
-		$nomprenom = "admin";
 	}
 
 	$_SESSION["nomPrenom"] = $nomprenom;

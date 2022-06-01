@@ -8,7 +8,7 @@ function tableau($db, $query) {
 		$table = "var table = {header:[";
 		foreach(array_keys($data[0]) as $i=>$key) {
 			if (is_string($key)) {
-				$table = $table."\"".$key."\",";
+				$table = $table."\"".$key." \\u2796\",";
 			}
 		}
 		$table = $table."],row:[";

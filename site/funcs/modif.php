@@ -110,6 +110,27 @@ if (isset($_POST["type"]) && isset($_POST["nouveau"]) && isset($_POST["password"
 	$change->execute(array("mdp"=>$pass1, "email" => $_SESSION["username"]));
 	$change->closeCursor();
 	header("Location: ../compte.php?erreur=no&type=".$type);
+} else if (isset($_POST["type"]) && isset($_POST["password"]) && $_POST["type"] === "del") {
+	$type = htmlspecialchars($_POST["type"]);
+	$passwd = htmlspecialchars($_POST["password"]);
+	
+	$check = $db->prepare("SELECT actif, prenom, nom FROM clients WHERE mdp=SHA1(:passwd) && email=:email");
+	$check->execute(array("passwd"=>$passwd, "email" => $_SESSION["username"]));
+	$data = $check->fetchAll();
+	$check->closeCursor();
+
+	if (count($data) == 1 && $data[0]["actif"] == 0) {
+		header("Location: ../compte.php?erreur=inactif&type=".$type);
+		die;
+	} else if (count($data) != 1) {
+		header("Location: ../compte.php?erreur=mdp&type=".$type);
+		die;
+	}
+
+	$change = $db->prepare("UPDATE clients SET actif = 0  WHERE email=:email");
+	$change->execute(array("email" => $_SESSION["username"]));
+	$change->closeCursor();
+	header("Location: ../funcs/logout.php");
 } else {
 	header("Location: ../compte.php");
 	die();

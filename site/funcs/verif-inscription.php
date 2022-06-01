@@ -33,13 +33,13 @@ if (isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["mail"]) && 
 
 	$query = $db->prepare("SELECT actif FROM clients WHERE email = ?");
 	$query->execute(array($email));
-	$data = $query->fetch();
+	$data = $query->fetchAll();
 	$query->closeCursor();
 
 	if (count($data) != 0 && $data["actif"] == 0) {
 		header("Location: ../inscription.php?err=inactif".$get);
 		die();
-	} else {
+	} else if (count($data) != 0) {
 		header("Location: ../inscription.php?err=existe".$get);
 		die();
 	}

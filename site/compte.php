@@ -17,10 +17,11 @@ if (!isset($_SESSION["username"])) {
 	<h1>Modifier des informations</h1>
 	
 	<select name="type" id="select">
-		<option value="nom">Nom</option>
-		<option value="pre">Prénom</option>
-		<option value="mdp">Mot de passe</option>
-		<option value="mail">E-mail</option>
+		<option value="nom">Changer le nom</option>
+		<option value="pre">Changer le prénom</option>
+		<option value="mdp">Changer le mot de passe</option>
+		<option value="mail">Changer l'e-mail</option>
+		<option value="del">Supprimer le compte</option>
 	</select>
 
 	<div id ="clean">
@@ -29,7 +30,7 @@ if (!isset($_SESSION["username"])) {
 	<label><b>Confirmez avec votre mot de passe actuel</b></label>
 	<input type="password" placeholder="Mot de passe" name="password" required>
 
-	<input type="submit" id='submit' value="Changer">
+	<input type="submit" id='submit' value="Valider">
 
 	<?php
 	if (isset($_GET["erreur"])) {
@@ -123,6 +124,8 @@ var valeurs = {
 			name: "pass2"
 		}
 	],
+	del: [
+	],
 };
 
 var roulette = document.getElementById("select");
@@ -164,6 +167,9 @@ if (isset($_GET["type"])) {
 		break;
 		case "mail";
 			echo "Change('mail');";
+		break;
+		case "del";
+			echo "Change('del');";
 		break;
 	};
 } else {
