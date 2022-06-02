@@ -1,11 +1,11 @@
 <?php
-function tableau($db, $query) {
+function tableau($db, $query, $name) {
 	$stmt = $db->query($query);
 	$data = $stmt->fetchAll();
 	$stmt->closeCursor();
 
 	if (count($data) > 0) {
-		$table = "var table = {header:[";
+		$table = "var ".$name."  = {header:[";
 		foreach(array_keys($data[0]) as $i=>$key) {
 			if (is_string($key)) {
 				$table = $table."\"".$key." \\u2796\",";
