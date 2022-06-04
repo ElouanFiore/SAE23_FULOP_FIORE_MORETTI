@@ -1,17 +1,17 @@
 <?php
 require_once("connexion-base.php");
 session_start();
-if (isset($_POST["type"]) && isset($_POST["nouveau"]) && isset($_POST["password"])) {
+if (isset($_POST["type"]) AND isset($_POST["nouveau"]) AND isset($_POST["password"])) {
 	$type = htmlspecialchars($_POST["type"]);
 	$nouveau = strtolower(htmlspecialchars($_POST["nouveau"]));
 	$passwd = htmlspecialchars($_POST["password"]);
 
-	$check = $db->prepare("SELECT actif, prenom, nom FROM clients WHERE mdp=SHA1(:passwd) && email=:email");
+	$check = $db->prepare("SELECT actif, prenom, nom FROM clients WHERE mdp=SHA1(:passwd) AND email=:email");
 	$check->execute(array("passwd"=>$passwd, "email" => $_SESSION["username"]));
 	$data = $check->fetchAll();
 	$check->closeCursor();
 
-	if (count($data) == 1 && $data[0]["actif"] == 0) {
+	if (count($data) == 1 AND $data[0]["actif"] == 0) {
 		header("Location: ../compte.php?erreur=inactif&type=".$type);
 		die;
 	} else if (count($data) != 1) {
@@ -74,13 +74,13 @@ if (isset($_POST["type"]) && isset($_POST["nouveau"]) && isset($_POST["password"
 	$query->closeCursor();
 	header("Location: ../compte.php?erreur=no&type=".$type);
 
-} else if (isset($_POST["type"]) && isset($_POST["pass1"]) && isset($_POST["pass2"]) && isset($_POST["password"])) {
+} else if (isset($_POST["type"]) AND isset($_POST["pass1"]) AND isset($_POST["pass2"]) AND isset($_POST["password"])) {
 	$type = htmlspecialchars($_POST["type"]);
 	$pass1 = htmlspecialchars($_POST["pass1"]);
 	$pass2 = htmlspecialchars($_POST["pass2"]);
 	$passwd = htmlspecialchars($_POST["password"]);
 
-	$check = $db->prepare("SELECT actif, prenom, nom FROM clients WHERE mdp=SHA1(:passwd) && email=:email");
+	$check = $db->prepare("SELECT actif, prenom, nom FROM clients WHERE mdp=SHA1(:passwd) AND email=:email");
 	$check->execute(array("passwd"=>$passwd, "email" => $_SESSION["username"]));
 	$data = $check->fetchAll();
 	$check->closeCursor();
@@ -88,7 +88,7 @@ if (isset($_POST["type"]) && isset($_POST["nouveau"]) && isset($_POST["password"
 	if ($pass1 !== $pass2) {
 		header("Location: ../compte.php?erreur=mememdp&type=".$type);
 		die;
-	} else if (count($data) == 1 && $data[0]["actif"] == 0) {
+	} else if (count($data) == 1 AND $data[0]["actif"] == 0) {
 		header("Location: ../compte.php?erreur=inactif&type=".$type);
 		die;
 	} else if (count($data) != 1) {
@@ -96,7 +96,7 @@ if (isset($_POST["type"]) && isset($_POST["nouveau"]) && isset($_POST["password"
 		die;
 	}
 
-	$check = $db->prepare("SELECT actif, prenom, nom FROM clients WHERE mdp=SHA1(:passwd) && email=:email");
+	$check = $db->prepare("SELECT actif, prenom, nom FROM clients WHERE mdp=SHA1(:passwd) AND email=:email");
 	$check->execute(array("passwd"=>$pass1, "email" => $_SESSION["username"]));
 	$data = $check->fetchAll();
 	$check->closeCursor();
@@ -110,16 +110,21 @@ if (isset($_POST["type"]) && isset($_POST["nouveau"]) && isset($_POST["password"
 	$change->execute(array("mdp"=>$pass1, "email" => $_SESSION["username"]));
 	$change->closeCursor();
 	header("Location: ../compte.php?erreur=no&type=".$type);
-} else if (isset($_POST["type"]) && isset($_POST["password"]) && $_POST["type"] === "del") {
+} else if (isset($_POST["type"]) AND isset($_POST["password"]) AND $_POST["type"] === "del") {
 	$type = htmlspecialchars($_POST["type"]);
 	$passwd = htmlspecialchars($_POST["password"]);
 	
-	$check = $db->prepare("SELECT actif, prenom, nom FROM clients WHERE mdp=SHA1(:passwd) && email=:email");
+	$check = $db->prepare("SELECT actif, prenom, nom FROM clients WHERE mdp=SHA1(:passwd) AND email=:email");
 	$check->execute(array("passwd"=>$passwd, "email" => $_SESSION["username"]));
 	$data = $check->fetchAll();
 	$check->closeCursor();
 
-	if (count($data) == 1 && $data[0]["actif"] == 0) {
+	$checkLoc = $db->prepare("SELECT COUNT(locations.id) AS c FROM locations, clients WHERE locations.idClient = clients.id AND locations.finLoc IS NULL AND clients.email = ?");
+	$checkLoc->execute(array($_SESSION["username"]));
+	$dataLoc = $checkLoc->fetchAll();
+	$checkLoc->closeCursor();
+
+	if (count($data) == 1 AND $data[0]["actif"] == 0) {
 		header("Location: ../compte.php?erreur=inactif&type=".$type);
 		die;
 	} else if (count($data) != 1) {
@@ -127,9 +132,16 @@ if (isset($_POST["type"]) && isset($_POST["nouveau"]) && isset($_POST["password"
 		die;
 	}
 
-	$change = $db->prepare("UPDATE clients SET actif = 0  WHERE email=:email");
-	$change->execute(array("email" => $_SESSION["username"]));
-	$change->closeCursor();
+	if ($dataLoc[0]["c"] > 0) {
+		$SupprCli = $db->prepare("UPDATE serveurs, locations, clients SET serveurs.idLocation = NULL, finLoc = CURRENT_TIMESTAMP, clients.actif = 0 WHERE serveurs.idLocation = locations.id AND locations.idClient = clients.id AND clients.email = ?");
+		$SupprCli->execute(array($_SESSION["username"]));
+		$SupprCli->closeCursor();
+	} else {
+		$SupprCli = $db->prepare("UPDATE clients SET actif = 0 WHERE email = ?");
+		$SupprCli->execute(array($_SESSION["username"]));
+		$SupprCli->closeCursor();
+	}
+
 	header("Location: ../funcs/logout.php");
 } else {
 	header("Location: ../compte.php");

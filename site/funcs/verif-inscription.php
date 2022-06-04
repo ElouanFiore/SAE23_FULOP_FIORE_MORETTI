@@ -1,7 +1,7 @@
 <?php
 session_start();
 require("connexion-base.php");
-if (isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["mail"]) && isset($_POST["pass"]) && isset($_POST["pass2"])) {
+if (isset($_POST["nom"]) AND isset($_POST["prenom"]) AND isset($_POST["mail"]) AND isset($_POST["pass"]) AND isset($_POST["pass2"])) {
 	$nom = strtolower(htmlspecialchars($_POST["nom"]));
 	$pre = strtolower(htmlspecialchars($_POST["prenom"]));
 	$email = strtolower(htmlspecialchars($_POST["mail"]));
@@ -36,7 +36,7 @@ if (isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["mail"]) && 
 	$data = $query->fetchAll();
 	$query->closeCursor();
 
-	if (count($data) != 0 && $data["actif"] == 0) {
+	if (count($data) != 0 AND $data["actif"] == 0) {
 		header("Location: ../inscription.php?err=inactif".$get);
 		die();
 	} else if (count($data) != 0) {

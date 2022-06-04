@@ -53,24 +53,63 @@ serv.header.push("Action");
 serv.row.forEach(val => {
 	if (val[6] == 1) {
 		let id = val[0];
-		let click = "<span onclick='Suppr("+id+")' style='cursor: pointer;'>Supprimer</span>"
+		let click = "<span onclick='Suppr("+id+")' style='cursor: pointer;'>Supprimer</span>";
 		val.push(click);
 	} else {
-		let click = "<span style='color: grey;'>Supprimer</span>"
+		let click = "<span style='color: grey;'>Supprimer</span>";
 		val.push(click);
 	}
 });
 
-serv.header.push("Action");
-serv.row.forEach(val => {
-	if (val[6] == 1) {
+locs.header.push("Action");
+locs.row.forEach(val => {
+	if (val[4] == "") {
 		let id = val[0];
-		let click = "<span onclick='Suppr("+id+")' style='cursor: pointer;'>Supprimer</span>"
+		let click = "<span onclick='Term("+id+")' style='cursor: pointer;'>Terminer</span>";
 		val.push(click);
 	} else {
-		let click = "<span style='color: grey;'>Supprimer</span>"
+		let click = "<span style='color: grey;'>Terminer</span>";
 		val.push(click);
 	}
+});
+
+clients.header.push("Action");
+clients.row.forEach(val => {
+	if (val[4] == "1") {
+		let id = val[0];
+		let click = "<span onclick='Close("+id+")' style='cursor: pointer;'>Supprimer</span>";
+		val.push(click);
+	} else {
+		let click = "<span style='color: grey;'>Supprimer</span>";
+		val.push(click);
+	}
+});
+
+function Close(id) {
+	let val = document.createElement("input");
+	val.type = "hidden";
+	val.name = "client";
+	val.value = id;
+	let form = document.createElement("form");
+	form.method = "POST";
+	form.action = "funcs/suppr-client.php";
+	form.appendChild(val);
+	document.body.appendChild(form);
+	form.submit();
+}
+
+function Term(id) {
+	let val = document.createElement("input");
+	val.type = "hidden";
+	val.name = "loc";
+	val.value = id;
+	let form = document.createElement("form");
+	form.method = "POST";
+	form.action = "funcs/term-loc.php";
+	form.appendChild(val);
+	document.body.appendChild(form);
+	form.submit();
+}
 
 function Suppr(id) {
 	let val = document.createElement("input");
