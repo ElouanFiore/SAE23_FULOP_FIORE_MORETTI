@@ -29,7 +29,8 @@ services:
     networks:
       - sae23net
     environment:
-      MYSQL_ROOT_PASSWORD: "root"
+      - MYSQL_ROOT_PASSWORD=root
+      - TZ=Europe/Paris
     volumes:
       - ./db/:/var/lib/mysql
 networks:
