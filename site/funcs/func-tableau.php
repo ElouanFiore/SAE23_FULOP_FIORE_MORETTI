@@ -23,7 +23,7 @@ function tableau($db, $query, $name) {
 		}
 		$table = $table."]};";
 	} else {
-		$table = "var table = {};";
+		$table = "var $name = {};";
 	}
 	echo $table;
 }
