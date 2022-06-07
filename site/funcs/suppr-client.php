@@ -15,7 +15,7 @@ if (isset($_SESSION["username"]) AND $_SESSION["username"] == "admin" AND isset(
 	$checkLoc->closeCursor();
 
 	if ($dataCheck[0]["COUNT(*)"] == 1 AND $dataCheckLoc[0]["COUNT(*)"] > 0) {
-		$supprCli = $db->prepare("UPDATE serveurs, locations, clients SET serveurs.idLocation = NULL, finLoc = CURRENT_TIMESTAMP, clients.actif = 0 WHERE serveurs.idLocation = locations.id AND locations.idClient = clients.id AND clients.id = ?");
+		$SupprCli = $db->prepare("UPDATE serveurs, locations, clients SET serveurs.idLocation = NULL, finLoc = CURRENT_TIMESTAMP, clients.actif = 0 WHERE serveurs.idLocation = locations.id AND locations.idClient = clients.id AND clients.id = ?");
 		$SupprCli->execute(array($client));
 		$SupprCli->closeCursor();
 	} else if ($dataCheck[0]["COUNT(*)"] == 1) {

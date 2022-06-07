@@ -1,5 +1,8 @@
 <?php
 session_start();
+if (!(isset($_SESSION["username"]) AND $_SESSION["username"] == "admin")) {
+	header("Location: index.php");
+}
 require("funcs/func-tableau.php");
 require("funcs/connexion-base.php");
 ?>
@@ -11,14 +14,6 @@ require("funcs/connexion-base.php");
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-	<?php
-	// if(isset($_SESSION(['username']) && $_SESSION['username']==='admin'){
-	//   echo"<link rel="stylesheet" href="css/style2.css" media="screen" type="text/css" />";
-	// }
-	//  else {
-	//	  echo"<link rel="stylesheet" href="css/404.css" media="screen" type="text/css" />";
-	//   }
-	?>
 	<link rel="stylesheet" href="css/style2.css" media="screen" type="text/css" />
  	<script src="funcs/func-tableau.js"></script>
 </head>
@@ -39,6 +34,7 @@ require("funcs/connexion-base.php");
 		<button onclick="AffCli()">Clients</button>
 		<button onclick="AffLocs()">Locations</button>
 		<input onchange="Actif()" value="actif" type="checkbox" id="activation"/>
+		<label for="activation" id="labactiv"></label>
 
 	</div>
 	<div id="table"></div>
@@ -46,7 +42,7 @@ require("funcs/connexion-base.php");
 <script>
 <?php
 tableau($db, "SELECT ID, Type, Cpu, Ram, Stockage, idLocation,  EnService FROM `serveurs`", "serv");
-tableau($db, "SELECT ID, Email, Nom, Prenom, Actif FROM `clients`", "clients");
+tableau($db, "SELECT ID, Email, Nom, Prenom, Actif FROM `clients` WHERE email != 'admin'", "clients");
 tableau($db, "SELECT ID, IDclient, IDserveur, DebutLoc, FinLoc FROM `locations`", "locs");
 ?>
 serv.header.push("Action");
@@ -171,24 +167,54 @@ function Actif() {
 
 function AffLocs() {
 	document.getElementById("table").innerHTML = "";
+	document.getElementById("labactiv").innerHTML = "Afficher seulement les locations en cours";
 	state = "locs";
-	Table(locs, locs);
+	if (document.getElementById("activation").checked) {
+		Actif(locs);
+	} else {
+		Table(locs, locs);
+	}
 }
 
 function AffServ() {
 	document.getElementById("table").innerHTML = "";
+	document.getElementById("labactiv").innerHTML = "Afficher seulement les serveurs en services";
 	state = "serv";
-	Table(serv, serv);
+	if (document.getElementById("activation").checked) {
+		Actif(serv);
+	} else {
+		Table(serv, serv);
+	}
 }
 
 function AffCli() {
 	document.getElementById("table").innerHTML = "";
+	document.getElementById("labactiv").innerHTML = "Afficher seulement les clients actifs";
 	state = "clients";
-	Table(clients, clients);
+	if (document.getElementById("activation").checked) {
+		Actif(clients);
+	} else {
+		Table(clients, clients);
+	}
 }
 
-var state = "serv";
-Table(serv, serv);
+<?php
+if (isset($_GET["table"])) {
+	switch ($_GET["table"]) {
+		case "clients";
+			echo "\nAffCli();";
+		break;
+		case "serv";
+			echo "\nAffServ();";
+		break;
+		case "locs";
+			echo "\nAffLocs();";
+		break;
+	}
+} else {
+	echo "\nAffServ();";
+}
+?>
 </script>
 
 
