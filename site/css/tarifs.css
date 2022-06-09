@@ -10,8 +10,11 @@ table{
     text-align: left;
 }
 
-#cpu{
+thead{
     background-color: rgb(85, 238, 238);
+    width: 100%;
+    height: 35px;
+    text-align: center;
 }
 
 body{
@@ -37,6 +40,12 @@ td{
     padding: 7px 12px;
     border: 1px solid black;
     background-color: #f3f3f3;
+}
+
+#gris{
+    padding: 7px 12px;
+    border: 1px solid black;
+    background-color: #c8c2c2;
 }
 
 nav {
@@ -70,9 +79,6 @@ nav .onglets a:hover{
     color: royalblue;
 }
 
-
-
 html{
 	font-family: 'Roboto', sans-serif; 
 }
-
