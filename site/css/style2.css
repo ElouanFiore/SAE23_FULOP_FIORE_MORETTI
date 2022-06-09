@@ -200,3 +200,15 @@ th {
 .gestion {
     text-align: center;
 }
+
+form#addServ {
+	display: flex;
+	margin: 2rem 20rem 3rem 20rem;
+	justify-content: space-around;
+	text-align: center;
+	background-color: rosybrown;
+}
+
+#addServ input {
+	width: auto;
+}

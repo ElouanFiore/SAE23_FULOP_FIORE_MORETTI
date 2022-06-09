@@ -14,6 +14,9 @@ if (!isset($_SESSION["username"])) {
 </head>
 <body>
 <form action='funcs/modif.php' method='POST'>
+<?php
+if ($_SESSION["username"] != "admin") {
+?>
 	<h1>Modifier des informations</h1>
 	
 	<select name="type" id="select">
@@ -26,7 +29,19 @@ if (!isset($_SESSION["username"])) {
 
 	<div id ="clean">
 	</div>
+<?php
+} else {
+?>
+	<h1>Modifier le mot de passe du compte Admin</h1>
+	<input type="hidden" value="mdp" name="type">
+	<label><b>Votre nouveau mot de passe</b></label>
+	<input type="password" name="pass1">
+	<label><b>Re-tapez votre nouveau mot de passe</b></label>
+	<input type="password" name="pass2">
 
+<?php
+}
+?>
 	<label><b>Confirmez avec votre mot de passe actuel</b></label>
 	<input type="password" placeholder="Mot de passe" name="password" required>
 
@@ -65,6 +80,9 @@ if (!isset($_SESSION["username"])) {
 	<p>Multicast ~ Votre hébergeur</p>
 </form>
 <script>
+<?php
+if ($_SESSION["username"] != "admin") {
+?>
 var valeurs = {
 	pre:[
 		{
@@ -154,26 +172,27 @@ roulette.addEventListener("change", function() {
 	Change(roulette.value);
 });
 <?php
-if (isset($_GET["type"])) {
-	switch($_GET["type"]) {
-		case "pre";
-			echo "Change('pre');";
-		break;
-		case "nom";
-			echo "Change('nom');";
-		break;
-		case "mdp";
-			echo "Change('mdp');";
-		break;
-		case "mail";
-			echo "Change('mail');";
-		break;
-		case "del";
-			echo "Change('del');";
-		break;
-	};
-} else {
-	echo "Change('nom');";
+	if (isset($_GET["type"])) {
+		switch($_GET["type"]) {
+			case "pre";
+				echo "Change('pre');";
+			break;
+			case "nom";
+				echo "Change('nom');";
+			break;
+			case "mdp";
+				echo "Change('mdp');";
+			break;
+			case "mail";
+				echo "Change('mail');";
+			break;
+			case "del";
+				echo "Change('del');";
+			break;
+		};
+	} else {
+		echo "Change('nom');";
+	}
 }
 ?>
 </script>

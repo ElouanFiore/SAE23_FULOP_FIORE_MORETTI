@@ -24,7 +24,8 @@ session_start();
 			<div class="buttons">
 			<?php
 			if(isset($_SESSION['username']) && $_SESSION['username'] == 'admin'){
-				echo"<button class='admin'>Administration</button>";
+				echo"<button class=\"admin\" onclick=\"window.location.href='admin.php';\">Administration</button>";
+				echo"<button class='user'>Compte</button>";
 				echo"<button class='deconnexion'>Se déconnecter</button>";
 			} else if(isset($_SESSION['username'])) {
 				$user = $_SESSION['nomPrenom'];
@@ -82,14 +83,6 @@ $(document).ready(function(){
 		window.location.href = "funcs/logout.php";
 	});
 });
-
-//Pour le bouton administration
-$(document).ready(function(){
-	$(".admin").click(function(){
-		window.location.href = "admin.php";
-	});
-});
-
 
 </script>
 </body>
