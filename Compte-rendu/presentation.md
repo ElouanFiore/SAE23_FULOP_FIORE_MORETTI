@@ -1,3 +1,6 @@
+<body style="background-color:black;">
+
+
 # Présentation de notre projet ***'Multicast'***
 
 <p style="text-align:center;"><img src="assets/presentation.JPG" width=600px></p>
@@ -133,3 +136,5 @@
 
 ----
 #### ☁️ Projet Multicast ~ Elouan FIORRE, Timothée FULOP, Luigi MORETTI ☁️
+  
+ </body>
