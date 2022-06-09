@@ -1,7 +1,7 @@
 table{
     width:auto;
     margin:0 auto;
-    margin-top:1%;
+    margin-top: 2em;
     font-family: 'Roboto', sans-serif; 
     border-collapse: collapse;
     min-width: 400px;
@@ -23,11 +23,8 @@ body{
 
 
 #titre{
-    margin-bottom: 2%;
-    width:400px;
-    margin-right: 45%;
-    margin-left: 45%;
-    margin-top:1%;
+    margin-top: 1em;
+	text-align: center;
     font-family: 'Roboto', sans-serif; 
 }
 
@@ -81,4 +78,9 @@ nav .onglets a:hover{
 
 html{
 	font-family: 'Roboto', sans-serif; 
+}
+
+h2 {
+	margin-top: 2em;
+	text-align: center;
 }
