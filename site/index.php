@@ -40,7 +40,7 @@ session_start();
 		</nav>
 
 		<header>
-			<h1><b>Multicast,</br> votre hébergeur.</b> ☁️</h1>
+			<h1><b>Multicast,</br> votre hébergeur.</b> <a href="morpion.html" id="easter-egg">☁️</a></h1>
 		</header>
 
 		<footer>

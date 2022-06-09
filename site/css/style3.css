@@ -210,6 +210,11 @@ th {
 	background-color: rosybrown;
 }
 
+
+#easter-egg {
+	text-decoration: none;
+}
+
 /*Chargement test*/
 
 #loading {width: 100%;height: 100%;top: 0px;left: 0px;position: fixed;display: block; z-index: 99}
