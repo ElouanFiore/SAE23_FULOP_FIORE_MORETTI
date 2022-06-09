@@ -3,22 +3,8 @@ session_start();
 if (!isset($_SESSION["username"])) {
 		header("Location: login.php?redirect=louer.php");
 }
-
 require("funcs/connexion-base.php");
 require("funcs/func-tableau.php");
-
-if (isset($_POST["type"]) && isset($_POST["ram"]) && isset($_POST["cpu"])) {
-	$type = htmlspecialchars($_POST["type"]);
-	$cpu = htmlspecialchars($_POST["cpu"]);
-	$ram = htmlspecialchars($_POST["ram"]);
-	$typeset = array("JEU", "WEB", "STOCKAGE");
-	$cpuset = array("8", "16", "32");
-	$ramset = array("32", "128", "256");
-	
-	if (in_array($type, $typeset) AND in_array($ram, $ramset) AND in_array($cpu, $cpuset)) {
-		$sql = "SELECT * FROM ServeursDispo WHERE Type='$type' AND CPU >= $cpu AND RAM >= $ram";
-	}
-}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -70,12 +56,6 @@ if (isset($_POST["type"]) && isset($_POST["ram"]) && isset($_POST["cpu"])) {
 	
 	<h1 id="erreur" class="info"></h1>
 
-	<?php
-	if (isset($sql)) {
-		echo "<h1 class='info'>Type : $type / Nombre minimum de coeurs : $cpu / Quantitée minimal de RAM : $ram Go </h1>";
-	}
-	?>
-
 	<div id="table"></div>
 
 	<div class="anim">
@@ -86,28 +66,6 @@ if (isset($_POST["type"]) && isset($_POST["ram"]) && isset($_POST["cpu"])) {
 
 
 	<script>
-		// Affichage 
-
-		<?php
-		if (isset($sql)) {
-			tableau($db, $sql, "servs");
-		?>
-		if (Object.keys(servs).length == 0) {
-			document.getElementById("erreur").innerHTML = "Aucun serveurs avec ces spécifications n'est disponible";
-		} else {
-			servs.header.push("Action");
-			servs.row.forEach(val => {
-				let id = val[0];
-				let click = "<span onclick='Reserver("+id+")' style='cursor: pointer;'>Louer</span>";
-				val.push(click);
-			});
-
-			Table(servs, servs);
-		}
-		<?php
-		}
-		?>
-
 		function Reserver(id) {
 			var formul = document.createElement("form");
 			formul.method = "POST";
@@ -128,12 +86,15 @@ if (isset($_POST["type"]) && isset($_POST["ram"]) && isset($_POST["cpu"])) {
 			switch (type) {
 				case "JEU":
 					document.getElementById("type-f").innerText = "Un serveur de Jeu 🎮";
+					document.getElementById("table").innerHTML = "";
 					break;
 				case "STOCKAGE":
 					document.getElementById("type-f").innerText = "Un serveur de Stockage 💾";
+					document.getElementById("table").innerHTML = "";
 					break;
 				case "WEB":
 					document.getElementById("type-f").innerText = "Un serveur Web ☁️";
+					document.getElementById("table").innerHTML = "";
 					break;
 				case "--":
 					document.getElementById("type-f").innerText = "";
@@ -147,12 +108,15 @@ if (isset($_POST["type"]) && isset($_POST["ram"]) && isset($_POST["cpu"])) {
 			switch (cpu) {
 				case "8":
 					document.getElementById("cpu-f").innerText = "Avec le CPU 1 (8 coeurs)";
+					document.getElementById("table").innerHTML = "";
 					break;
 				case "16":
 					document.getElementById("cpu-f").innerText = "Avec le CPU 2 (16 coeurs)";
+					document.getElementById("table").innerHTML = "";
 					break;
 				case "32":
 					document.getElementById("cpu-f").innerText = "Avec le CPU 3 ⚡ (32 coeurs)";
+					document.getElementById("table").innerHTML = "";
 					break;
 				case "--":
 					document.getElementById("cpu-f").innerText = "";
@@ -165,12 +129,15 @@ if (isset($_POST["type"]) && isset($_POST["ram"]) && isset($_POST["cpu"])) {
 			switch (ram) {
 				case "32":
 					document.getElementById("ram-f").innerText = "Avec 32 Go de RAM";
+					document.getElementById("table").innerHTML = "";
 					break;
 				case "128":
 					document.getElementById("ram-f").innerText = "Avec 128 Go de RAM";
+					document.getElementById("table").innerHTML = "";
 					break;
 				case "256":
 					document.getElementById("ram-f").innerText = "Avec 256 Go de RAM ⚡";
+					document.getElementById("table").innerHTML = "";
 					break;
 				case "--":
 					document.getElementById("ram-f").innerText = "";
@@ -178,7 +145,7 @@ if (isset($_POST["type"]) && isset($_POST["ram"]) && isset($_POST["cpu"])) {
 			}
 		}
 
-		function choix() {
+		async function choix() {
 			var type = document.getElementById("choix_type").value;
 			var cpu = document.getElementById("choix_cpu").value;
 			var ram = document.getElementById("choix_ram").value;
@@ -186,38 +153,27 @@ if (isset($_POST["type"]) && isset($_POST["ram"]) && isset($_POST["cpu"])) {
 			if (type == "--" || cpu == "--" || ram == "--") {
 				document.getElementById("erreur").innerHTML = "Veuillez séléctionner les spécifications minimales du serveurs";
 			} else {
-				document.getElementById("erreur").innerHTML = "";
-				submit_post("louer.php", {type,cpu,ram});
+				let data = new FormData();
+				data.append("type", type);
+				data.append("cpu", cpu);
+				data.append("ram", ram);
+				let test = await fetch("funcs/aff-serv.php", {method: "POST", body: data});
+				let servs = await test.json()
+	
+				if (Object.keys(servs).length == 0) {
+					document.getElementById("erreur").innerHTML = "Aucun serveurs avec ces spécifications n'est disponible";
+				} else {
+					servs.header.push("Action");
+					servs.row.forEach(val => {
+						let id = val[0];
+						let click = "<span onclick='Reserver("+id+")' style='cursor: pointer;'>Louer</span>";
+						val.push(click);
+					});
+
+					document.getElementById("erreur").innerHTML = "";
+					Table(servs, servs);
+				}
 			}
-		}
-
-		// Requête POST :
-		function submit_post(url,para) {
-			var formul = document.createElement("form");
-			formul.method = "POST";
-			formul.action = url;
-
-			var input1 = document.createElement("input");
-			input1.type = "hidden"; 
-			input1.name = "type"; 
-			input1.value = para["type"]; 
-			formul.appendChild(input1); 
-
-			var input2 = document.createElement("input"); 
-			input2.type = "hidden";
-			input2.name = "cpu";
-			input2.value = para["cpu"];
-			formul.appendChild(input2);
-
-			var input3 = document.createElement("input"); 
-			input3.type = "hidden";
-			input3.name = "ram";
-			input3.value = para["ram"];
-			formul.appendChild(input3);
-
-			document.body.appendChild(formul); 
-
-			formul.submit(); // Soumission du formulaire
 		}
 	</script>
 
