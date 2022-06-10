@@ -76,7 +76,7 @@
 <br>
 
 ## **La gestion des serveurs loués :**
-### Une fois que l'utilisateur a louer ses différents serveurs, il a accès à une nouvelle page où il peut voir le récapitulatif des différents serveurs qu'il a pris, également la date de location, les spécificités mais également les rendre (ce qui rendra à nouveau possible la possibilité de louer ce dit serveur).
+### Une fois que l'utilisateur a loué ses différents serveurs, il a accès à une nouvelle page où il peut voir le récapitulatif des différents serveurs qu'il a pris, également la date de location, les spécificités mais également les rendre (ce qui rendra à nouveau possible la possibilité de louer ce dit serveur).
 
 <br>
 
@@ -100,7 +100,7 @@
 <br>
 
 ## **La gestion des serveurs loués :**
-### Lorsqu'on se connecte avec un compte spécialement prévu pour l'administration (admin en l'occurrence), la page débloque un nouvel onglet accessible uniquement pour cet utilisateur et qui lui permet de gérer toutes les informations lié aux serveurs ainsi que les utilisateurs.
+### Lorsqu'on se connecte avec un compte spécialement prévu pour l'administration (admin en l'occurrence), la page débloque un nouvel onglet accessible uniquement pour cet utilisateur et qui lui permet de gérer toutes les informations liées aux serveurs ainsi que les utilisateurs.
 
 <br>
 
@@ -111,7 +111,7 @@
 ### **L'administrateur peut gérer sur cette page :**
 <br>
 
-* ### ~ Les serveurs : Cela implique d'afficher l'entièreté des serveurs disponibles ou non (Il y a également un historique des serveurs supprimés) mais également la présence d'un bouton 'Supprimer' qui sert à retirer de la base de donnée (Tout en gardant une trace) un serveur pour qu'il ne soit plus disponible à la location.
+* ### ~ Les serveurs : Cela implique d'afficher l'entièreté des serveurs disponibles ou non (Il y a également un historique des serveurs supprimés) mais également la présence d'un bouton 'Supprimer' qui sert à retirer de la base de données (Tout en gardant une trace) un serveur pour qu'il ne soit plus disponible à la location.
 <br>
 
 <u>Aperçu :</u> <p style="text-align:center;"><img src="assets/1.JPG" width=500px></p>
@@ -135,24 +135,24 @@
 
 <br>
 
-## <u>**Présentation des facilités de développement:**</u>
+## <u>**Présentation des facilités de développement :**</u>
 
 <br>
 
 ## **Le même environnement pour tous**
-### Afin de faciliter le processus de développement nous avons mis en place une infrastructure avec des conteneurs gérés sous docker. Tout les services ont la mêmes versions que sur le serveur r207.borelly.net .
+### Afin de faciliter le processus de développement nous avons mis en place une infrastructure avec des conteneurs gérés sous docker. Tous les services ont la mêmes versions que sur le serveur r207.borelly.net .
 <p style="text-align:center;"><img src="assets/dc.png" width=500px></p> 
 
 <br>
 
 ## **Une facilité de déploiement**
-### Le site peut aussi êtres déployé plus facilement grâce au fichier docker-compose.yaml.
+### Le site peut aussi être déployé plus facilement grâce au fichier docker-compose.yaml.
 <p style="text-align:center;"><img src="assets/yaml.png" width=500px></p> 
 
 <br>
 
-## **Une base de donnée configurable rapidement**
-### Le script FillDb.py permet de générer des requpêtes SQL afin de remplir la base de fausses données, les fichier user.sql et db.sql permettent de mettre en place le squelette de la base de donnée.
+## **Une base de données configurable rapidement**
+### Le script FillDb.py permet de générer des requêtes SQL afin de remplir la base de fausses données, les fichier user.sql et db.sql permettent de mettre en place le squelette de la base de données.
 <p style="text-align:center;"><img src="assets/squelette.png" width=500px></p> 
 
 <br>
