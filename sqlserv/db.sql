@@ -42,7 +42,7 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON `multicast`.* TO 'web'@'%';
 
 CREATE VIEW `multicast`.`ServeursReserve` (idLocation, Début, Fin, IdServeur, Type, CPU, RAM, STOCKAGE, idClient, mail, nom, prenom) AS SELECT locations.id, locations.debutLoc, locations.finLoc, serveurs.id, serveurs.type, serveurs.cpu, serveurs.ram, serveurs.stockage, clients.id, clients.email, clients.nom, clients.prenom FROM `multicast`.`serveurs`, `multicast`.`locations`, `multicast`.`clients` WHERE serveurs.id=locations.idServeur && clients.id=locations.idClient && serveurs.enService=1 && locations.finLoc IS NULL;
 
-CREATE VIEW `multicast`.`VueClient` (Début, Fin, IdServeur, Type, CPU, RAM, STOCKAGE, enService, mail) AS SELECT locations.debutLoc, locations.finLoc, serveurs.id, serveurs.type, serveurs.cpu, serveurs.ram, serveurs.stockage, serveurs.enService, clients.email FROM `multicast`.`serveurs`, `multicast`.`locations`, `multicast`.`clients` WHERE serveurs.id=locations.idServeur && clients.id=locations.idClient;
+CREATE VIEW `multicast`.`VueClient` (ID, Début, Fin, IdServeur, Type, CPU, RAM, STOCKAGE, enService, mail) AS SELECT locations.id, locations.debutLoc, locations.finLoc, serveurs.id, serveurs.type, serveurs.cpu, serveurs.ram, serveurs.stockage, serveurs.enService, clients.email FROM `multicast`.`serveurs`, `multicast`.`locations`, `multicast`.`clients` WHERE serveurs.id=locations.idServeur && clients.id=locations.idClient;
 
 CREATE VIEW `multicast`.`ServeursDispo` (IdServeur, Type, CPU, RAM, STOCKAGE) AS SELECT serveurs.id, serveurs.type, serveurs.cpu, serveurs.ram, serveurs.stockage FROM `multicast`.`serveurs` WHERE serveurs.idLocation IS NULL && serveurs.enService=1;
 

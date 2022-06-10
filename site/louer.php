@@ -58,7 +58,7 @@ require("funcs/func-tableau.php");
 
 	<div id="table"></div>
 
-	<div class="anim">
+	<div class="anim" id="anim" hidden>
 		<div id="type-f"></div> <br>
 		<div id="cpu-f"></div><br>
 		<div id="ram-f"></div>
@@ -87,17 +87,21 @@ require("funcs/func-tableau.php");
 				case "JEU":
 					document.getElementById("type-f").innerText = "Un serveur de Jeu 🎮";
 					document.getElementById("table").innerHTML = "";
+					document.getElementById("anim").hidden= false;
 					break;
 				case "STOCKAGE":
 					document.getElementById("type-f").innerText = "Un serveur de Stockage 💾";
 					document.getElementById("table").innerHTML = "";
+					document.getElementById("anim").hidden= false;
 					break;
 				case "WEB":
 					document.getElementById("type-f").innerText = "Un serveur Web ☁️";
 					document.getElementById("table").innerHTML = "";
+					document.getElementById("anim").hidden= false;
 					break;
 				case "--":
 					document.getElementById("type-f").innerText = "";
+					document.getElementById("anim").hidden= true;
 					break;
 			}
 		}
@@ -109,17 +113,21 @@ require("funcs/func-tableau.php");
 				case "8":
 					document.getElementById("cpu-f").innerText = "Avec le CPU 1 (8 coeurs)";
 					document.getElementById("table").innerHTML = "";
+					document.getElementById("anim").hidden= false;
 					break;
 				case "16":
 					document.getElementById("cpu-f").innerText = "Avec le CPU 2 (16 coeurs)";
 					document.getElementById("table").innerHTML = "";
+					document.getElementById("anim").hidden= false;
 					break;
 				case "32":
 					document.getElementById("cpu-f").innerText = "Avec le CPU 3 ⚡ (32 coeurs)";
 					document.getElementById("table").innerHTML = "";
+					document.getElementById("anim").hidden= false;
 					break;
 				case "--":
 					document.getElementById("cpu-f").innerText = "";
+					document.getElementById("anim").hidden= true;
 					break;
 			}
 		}
@@ -130,17 +138,21 @@ require("funcs/func-tableau.php");
 				case "32":
 					document.getElementById("ram-f").innerText = "Avec 32 Go de RAM";
 					document.getElementById("table").innerHTML = "";
+					document.getElementById("anim").hidden= false;
 					break;
 				case "128":
 					document.getElementById("ram-f").innerText = "Avec 128 Go de RAM";
 					document.getElementById("table").innerHTML = "";
+					document.getElementById("anim").hidden= false;
 					break;
 				case "256":
 					document.getElementById("ram-f").innerText = "Avec 256 Go de RAM ⚡";
 					document.getElementById("table").innerHTML = "";
+					document.getElementById("anim").hidden= false;
 					break;
 				case "--":
 					document.getElementById("ram-f").innerText = "";
+					document.getElementById("anim").hidden= true;
 					break;
 			}
 		}
@@ -158,7 +170,7 @@ require("funcs/func-tableau.php");
 				data.append("cpu", cpu);
 				data.append("ram", ram);
 				let test = await fetch("funcs/aff-serv.php", {method: "POST", body: data});
-				let servs = await test.json()
+				let servs = await test.json();
 	
 				if (Object.keys(servs).length == 0) {
 					document.getElementById("erreur").innerHTML = "Aucun serveurs avec ces spécifications n'est disponible";
@@ -171,6 +183,7 @@ require("funcs/func-tableau.php");
 					});
 
 					document.getElementById("erreur").innerHTML = "";
+					document.getElementById("anim").hidden= true;
 					Table(servs, servs);
 				}
 			}

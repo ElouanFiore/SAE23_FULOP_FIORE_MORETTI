@@ -52,13 +52,13 @@ require_once("funcs/func-tableau.php");
 	<script>
 	
 	<?php
-	tableau($db, "SELECT Début, Fin, IdServeur, Type, CPU, RAM, STOCKAGE FROM `VueClient` WHERE mail='".$_SESSION["username"]."'", "locs");
+	tableau($db, "SELECT ID, Début, Fin, IdServeur, Type, CPU, RAM, STOCKAGE FROM `VueClient` WHERE mail='".$_SESSION["username"]."' ORDER BY id DESC", "locs");
 	?>
 	
 	locs.header.push("Action");
 	locs.row.forEach(val => {
-		if (val[1] == "") {
-			let id = val[2];
+		if (val[2] == "") {
+			let id = val[3];
 			let click = "<span onclick='Rendre("+id+")' style='cursor: pointer;'>Rendre</span>";
 			val.push(click);
 		} else {

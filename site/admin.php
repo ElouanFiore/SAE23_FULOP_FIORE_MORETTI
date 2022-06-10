@@ -72,46 +72,10 @@ require("funcs/connexion-base.php");
 	<div id="table"></div>
 
 <script>
-<?php
-tableau($db, "SELECT ID, Type, Cpu, Ram, Stockage, idLocation,  EnService FROM `serveurs` ORDER BY id DESC", "serv");
-tableau($db, "SELECT ID, Email, Nom, Prenom, Actif FROM `clients` WHERE email != 'admin' ORDER BY id DESC", "clients");
-tableau($db, "SELECT ID, IDclient, IDserveur, DebutLoc, FinLoc FROM `locations` ORDER BY id DESC", "locs");
-?>
-serv.header.push("Action");
-serv.row.forEach(val => {
-	if (val[6] == 1) {
-		let id = val[0];
-		let click = "<span onclick='Suppr("+id+")' style='cursor: pointer;'>Supprimer</span>";
-		val.push(click);
-	} else {
-		let click = "<span style='color: grey;'>Supprimer</span>";
-		val.push(click);
-	}
-});
-
-locs.header.push("Action");
-locs.row.forEach(val => {
-	if (val[4] == "") {
-		let id = val[0];
-		let click = "<span onclick='Term("+id+")' style='cursor: pointer;'>Terminer</span>";
-		val.push(click);
-	} else {
-		let click = "<span style='color: grey;'>Terminer</span>";
-		val.push(click);
-	}
-});
-
-clients.header.push("Action");
-clients.row.forEach(val => {
-	if (val[4] == "1") {
-		let id = val[0];
-		let click = "<span onclick='Close("+id+")' style='cursor: pointer;'>Supprimer</span>";
-		val.push(click);
-	} else {
-		let click = "<span style='color: grey;'>Supprimer</span>";
-		val.push(click);
-	}
-});
+var state = {};
+var servs = {};
+var locs = {};
+var clients = {};
 
 function Close(id) {
 	let val = document.createElement("input");
@@ -167,9 +131,9 @@ function Actif() {
 			index = 4;
 			var condition = "";
 			break;
-		case "serv":
-			newTable = JSON.parse(JSON.stringify(serv));
-			var oldTable = serv;
+		case "servs":
+			newTable = JSON.parse(JSON.stringify(servs));
+			var oldTable = servs;
 			index = 6;
 			var condition = 1;
 			break;
@@ -197,11 +161,29 @@ function Actif() {
 	}
 }
 
-function AffLocs() {
+async function AffLocs() {
 	document.getElementById("addServ").hidden = true;
 	document.getElementById("table").innerHTML = "";
 	document.getElementById("labactiv").innerHTML = "Afficher seulement les locations en cours";
+
+	let data = new FormData();
+	data.append("vue", "locs");
+	let reponse = await fetch("funcs/vue-admin.php", {method: "POST", body: data});
+	locs = await reponse.json();
 	state = "locs";
+
+	locs.header.push("Action");
+	locs.row.forEach(val => {
+		if (val[4] == "") {
+			let id = val[0];
+			let click = "<span onclick='Term("+id+")' style='cursor: pointer;'>Terminer</span>";
+			val.push(click);
+		} else {
+			let click = "<span style='color: grey;'>Terminer</span>";
+		val.push(click);
+		}
+	});
+
 	if (document.getElementById("activation").checked) {
 		Actif(locs);
 	} else {
@@ -209,23 +191,59 @@ function AffLocs() {
 	}
 }
 
-function AffServ() {
+async function AffServ() {
 	document.getElementById("table").innerHTML = "";
 	document.getElementById("labactiv").innerHTML = "Afficher seulement les serveurs en services";
 	document.getElementById("addServ").hidden = false;
-	state = "serv";
+
+	let data = new FormData();
+	data.append("vue", "servs");
+	let reponse = await fetch("funcs/vue-admin.php", {method: "POST", body: data});
+	servs = await reponse.json();
+	state = "servs";
+
+	servs.header.push("Action");
+	servs.row.forEach(val => {
+		if (val[6] == 1) {
+			let id = val[0];
+			let click = "<span onclick='Suppr("+id+")' style='cursor: pointer;'>Supprimer</span>";
+			val.push(click);
+		} else {
+			let click = "<span style='color: grey;'>Supprimer</span>";
+			val.push(click);
+		}
+	});
+
 	if (document.getElementById("activation").checked) {
-		Actif(serv);
+		Actif();
 	} else {
-		Table(serv, serv);
+		Table(servs, servs);
 	}
 }
 
-function AffCli() {
+async function AffCli() {
 	document.getElementById("addServ").hidden = true;
 	document.getElementById("table").innerHTML = "";
 	document.getElementById("labactiv").innerHTML = "Afficher seulement les clients actifs";
+
+	let data = new FormData();
+	data.append("vue", "clients");
+	let reponse = await fetch("funcs/vue-admin.php", {method: "POST", body: data});
+	clients = await reponse.json();
 	state = "clients";
+
+	clients.header.push("Action");
+	clients.row.forEach(val => {
+		if (val[4] == "1") {
+			let id = val[0];
+			let click = "<span onclick='Close("+id+")' style='cursor: pointer;'>Supprimer</span>";
+			val.push(click);
+		} else {
+			let click = "<span style='color: grey;'>Supprimer</span>";
+			val.push(click);
+		}
+	});
+
 	if (document.getElementById("activation").checked) {
 		Actif(clients);
 	} else {
@@ -252,20 +270,9 @@ if (isset($_GET["table"])) {
 ?>
 </script>
 
-
-
-
-
-
-
-</body>
-
-
-
 <footer>
 	<p>RT1 builded and &#128011 Powered.</p>
 </footer>
 
-
-
+</body>
 </html>
