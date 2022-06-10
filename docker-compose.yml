@@ -1,15 +1,9 @@
 version: "3"
 services:
-  web:
-    build: ./webserv
+  http:
+    build: ./httpserv/
     ports:
       - "8080:80"
-    networks:
-      - sae23net
-    volumes:
-      - ./site/:/var/www/html
-  php:
-    build: ./phpserv
     networks:
       - sae23net
     volumes:
