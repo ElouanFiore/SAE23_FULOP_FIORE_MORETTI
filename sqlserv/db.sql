@@ -1,6 +1,4 @@
 DROP DATABASE IF EXISTS `multicast`;
-DROP USER IF EXISTS `adminMulticast`;
-DROP USER IF EXISTS `web`;
 
 CREATE DATABASE `multicast`;
 
@@ -13,7 +11,7 @@ CREATE TABLE `multicast`.`serveurs` (
   `idLocation` int NULL DEFAULT NULL,
   `enService` boolean NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`)
-) ENGINE = InnoDB;
+) ENGINE = MyISAM;
 
 CREATE TABLE `multicast`.`clients` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -23,7 +21,7 @@ CREATE TABLE `multicast`.`clients` (
   `prenom` varbinary(50) NOT NULL,
   `actif` boolean NOT NULL DEFAULT 1, 
   PRIMARY KEY (`id`)
-) ENGINE = InnoDB;
+) ENGINE = MyISAM;
 
 CREATE TABLE `multicast`.`locations` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -32,13 +30,7 @@ CREATE TABLE `multicast`.`locations` (
   `debutLoc` DATETIME NOT NULL,
   `finLoc` DATETIME NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE = InnoDB;
-
-CREATE USER 'adminMulticast'@'%' IDENTIFIED WITH caching_sha2_password BY 'admin';
-GRANT ALL PRIVILEGES ON `multicast`.* TO 'adminMulticast'@'%';
-
-CREATE USER 'web'@'%' IDENTIFIED WITH caching_sha2_password BY 'zj%b6zube^&ajd';
-GRANT SELECT, INSERT, UPDATE, DELETE ON `multicast`.* TO 'web'@'%';
+) ENGINE = MyISAM;
 
 CREATE VIEW `multicast`.`ServeursReserve` (idLocation, Début, Fin, IdServeur, Type, CPU, RAM, STOCKAGE, idClient, mail, nom, prenom) AS SELECT locations.id, locations.debutLoc, locations.finLoc, serveurs.id, serveurs.type, serveurs.cpu, serveurs.ram, serveurs.stockage, clients.id, clients.email, clients.nom, clients.prenom FROM `multicast`.`serveurs`, `multicast`.`locations`, `multicast`.`clients` WHERE serveurs.id=locations.idServeur && clients.id=locations.idClient && serveurs.enService=1 && locations.finLoc IS NULL;
 
@@ -50,93 +42,19 @@ INSERT INTO `multicast`.`clients` (`email`, `mdp`, `nom`, `prenom`) VALUES ('adm
 INSERT INTO `multicast`.`clients` (`email`, `mdp`, `nom`, `prenom`) VALUES ('toto@protonmail.com', SHA1('abcdef'), 'toto', 'toto');
 INSERT INTO `multicast`.`clients` (`email`, `mdp`, `nom`, `prenom`) VALUES ('tata@gmail.com', SHA1('123456'), 'tata', 'tata');
 
-INSERT INTO `multicast`.`locations` (`idClient`, `idServeur`, `debutLoc`) VALUES (2, 23, CURRENT_TIMESTAMP);
-INSERT INTO `multicast`.`locations` (`idClient`, `idServeur`, `debutLoc`) VALUES (2, 20, CURRENT_TIMESTAMP);
-INSERT INTO `multicast`.`locations` (`idClient`, `idServeur`, `debutLoc`) VALUES (2, 1, CURRENT_TIMESTAMP);
-INSERT INTO `multicast`.`locations` (`idClient`, `idServeur`, `debutLoc`) VALUES (3, 8, CURRENT_TIMESTAMP);
-INSERT INTO `multicast`.`locations` (`idClient`, `idServeur`, `debutLoc`) VALUES (3, 30, CURRENT_TIMESTAMP);
-INSERT INTO `multicast`.`locations` (`idClient`, `idServeur`, `debutLoc`) VALUES (3, 5, CURRENT_TIMESTAMP);
-INSERT INTO `multicast`.`locations` (`idClient`, `idServeur`, `debutLoc`, `finLoc`) VALUES (2, 13, "2022-05-20 10:00:00", CURRENT_TIMESTAMP);
+INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('JEU', '32', '256', '100', '0');
+INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('STOCKAGE', '16', '128', '4000', '0');
+INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`) VALUES ('JEU', '16', '128', '50');
+INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`) VALUES ('WEB', '16', '128', '200');
+INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`) VALUES ('JEU', '32', '256', '200');
+INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`) VALUES ('WEB', '8', '32', '40');
+INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`) VALUES ('STOCKAGE', '8', '32', '4000');
+INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`) VALUES ('WEB', '8', '32', '10');
 
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('JEU', '32', '256', '2000', 1);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('JEU', '16', '128', '500', 1);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('JEU', '8', '32', '250', 1);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('JEU', '8', '128', '500', 1);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('WEB', '8', '256', '500', 1);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('STOCKAGE', '32', '128', '250', 0);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('JEU', '8', '32', '2000', 0);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('STOCKAGE', '32', '256', '250', 1);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('JEU', '16', '256', '500', 0);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('WEB', '16', '256', '2000', 1);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('WEB', '8', '128', '2000', 0);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('STOCKAGE', '8', '32', '500', 1);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('JEU', '8', '32', '500', 0);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('WEB', '8', '32', '500', 1);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('WEB', '8', '128', '500', 0);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('STOCKAGE', '32', '32', '2000', 0);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('STOCKAGE', '16', '32', '2000', 1);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('JEU', '8', '256', '250', 1);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('WEB', '16', '256', '250', 0);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('STOCKAGE', '8', '128', '250', 1);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('STOCKAGE', '8', '128', '500', 0);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('STOCKAGE', '8', '256', '250', 0);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('WEB', '32', '128', '2000', 1);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('STOCKAGE', '16', '128', '500', 0);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('STOCKAGE', '8', '256', '2000', 1);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('JEU', '8', '128', '2000', 1);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('WEB', '32', '32', '250', 1);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('STOCKAGE', '16', '32', '500', 1);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('JEU', '16', '256', '250', 1);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('JEU', '32', '256', '500', 1);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('JEU', '8', '128', '250', 0);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('WEB', '32', '128', '500', 1);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('STOCKAGE', '16', '128', '250', 1);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('JEU', '32', '32', '500', 1);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('JEU', '32', '128', '250', 1);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('WEB', '32', '32', '500', 0);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('JEU', '32', '128', '2000', 0);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('STOCKAGE', '16', '256', '2000', 1);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('STOCKAGE', '32', '256', '2000', 0);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('WEB', '16', '32', '250', 0);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('WEB', '32', '32', '2000', 0);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('STOCKAGE', '16', '256', '500', 1);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('WEB', '8', '32', '2000', 1);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('JEU', '16', '128', '2000', 1);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('WEB', '16', '128', '250', 1);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('STOCKAGE', '16', '256', '250', 0);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('WEB', '32', '256', '500', 0);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('JEU', '32', '32', '2000', 1);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('WEB', '16', '256', '500', 1);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('JEU', '8', '256', '500', 0);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('WEB', '16', '128', '2000', 0);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('STOCKAGE', '8', '32', '250', 0);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('JEU', '32', '256', '250', 0);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('WEB', '16', '128', '500', 0);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('WEB', '16', '32', '500', 1);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('STOCKAGE', '8', '128', '2000', 0);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('JEU', '16', '256', '2000', 0);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('WEB', '32', '256', '2000', 0);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('WEB', '32', '256', '250', 1);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('STOCKAGE', '8', '32', '2000', 1);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('WEB', '8', '256', '250', 0);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('STOCKAGE', '32', '32', '250', 1);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('STOCKAGE', '32', '256', '500', 0);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('STOCKAGE', '16', '128', '2000', 0);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('STOCKAGE', '32', '128', '500', 1);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('STOCKAGE', '16', '32', '250', 0);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('WEB', '8', '256', '2000', 1);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('WEB', '16', '32', '2000', 1);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('WEB', '8', '32', '250', 0);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('STOCKAGE', '8', '256', '500', 1);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('WEB', '8', '128', '250', 1);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('WEB', '32', '128', '250', 0);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('JEU', '16', '128', '250', 0);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('STOCKAGE', '32', '32', '500', 0);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('JEU', '16', '32', '2000', 0);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('JEU', '8', '256', '2000', 0);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('JEU', '16', '32', '250', 1);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('JEU', '16', '32', '500', 0);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('JEU', '32', '128', '500', 0);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('STOCKAGE', '32', '128', '2000', 1);
-INSERT INTO `multicast`.`serveurs` (`type`, `cpu`, `ram`, `stockage`, `enService`) VALUES ('JEU', '32', '32', '250', 0);
+INSERT INTO `multicast`.`locations` (`idClient`, `idServeur`, `debutLoc`, `finLoc`) VALUES (2, 1, '2021-12-01 09:14:04', '2022-04-01 09:34:02');
+INSERT INTO `multicast`.`locations` (`idClient`, `idServeur`, `debutLoc`, `finLoc`) VALUES (3, 2, '2021-12-02 20:45:33', '2021-12-11 11:09:22');
+INSERT INTO `multicast`.`locations` (`idClient`, `idServeur`, `debutLoc`) VALUES (2, 4, '2022-04-01 09:45:58');
+INSERT INTO `multicast`.`locations` (`idClient`, `idServeur`, `debutLoc`) VALUES (3, 3, '2022-06-01 17:31:01');
+INSERT INTO `multicast`.`locations` (`idClient`, `idServeur`, `debutLoc`) VALUES (2, 7, '2022-06-05 11:00:47');
+
 UPDATE `multicast`.`serveurs`, `multicast`.`locations` SET serveurs.idLocation=locations.id, serveurs.enService=1 WHERE serveurs.id=locations.idServeur && locations.finLoc IS NULL;

@@ -25,7 +25,8 @@ services:
     environment:
       PMA_HOST: sql
   sql:
-    image: mysql
+    image: mariadb:10.0.38
+    command: --character-set-server=utf8
     networks:
       - sae23net
     environment:

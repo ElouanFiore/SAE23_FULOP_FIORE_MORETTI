@@ -14,9 +14,9 @@ require("funcs/connexion-base.php");
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="css/styleAdmin.css" media="screen" type="text/css" />
 	<title>Page d'administration</title>
-	<script src="funcs/func-tableau.js"></script>
+	<link rel="stylesheet" href="css/styleAdmin.css" media="screen" type="text/css" />
+ 	<script src="funcs/func-tableau.js"></script>
 </head>
 
 
