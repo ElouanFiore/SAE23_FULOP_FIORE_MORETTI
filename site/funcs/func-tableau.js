@@ -1,8 +1,11 @@
+// Crée un tableau HTML à partir d'un dictionaire 
 function Table(data, original) {
 	let affiche = document.createElement("table");
 
 	let ligne = document.createElement("tr");
+	// Crée les Table Header qui servent aussi de bouton de tri
 	data.header.forEach(header => {
+		// Rend la colone triable sur click seulement si elle ne contient pas les boutons d'actions
 		let cellule = document.createElement("th");
 		if (header != "Action") {
 			cellule.onclick = function() {
@@ -26,9 +29,12 @@ function Table(data, original) {
 	document.getElementById("table").appendChild(affiche);
 }
 
+// Fonction qui sert à trier une liste de liste
+// retourne un nombre négatif ou positif pour que la fonction sort native sache comment ranger
 function leTri(a, b) {
 	let c = a - b;
 	
+	// si a et b en sont pas des nombre on utilise la fonction sort qui tri les chaine de caractère
 	if (isNaN(c)) {
 		c = [a, b];
 		c.sort();
@@ -45,21 +51,24 @@ function leTri(a, b) {
 };
 
 function Tri(header, original) {
-	let sens = header.split(" ")[1];
+	let sens = header.split(" ")[1]; // Récupère l'émojie pour connaitre dans quel sens trier
 	let titre = header.split(" ")[0];
-	let index = original.header.indexOf(titre+" \u2796");
-	let sorted = JSON.parse(JSON.stringify(original));
+	let index = original.header.indexOf(titre+" \u2796"); // L'index selon lequel trier la table
+	let sorted = JSON.parse(JSON.stringify(original)); // Créé un clone sans lien du dictionaire original
 
 	document.getElementById("table").innerHTML = "";
 	if (sens == "\u2B07") {
+		// Tri le corp du tableau par ordre descendant 
 		sorted.row.sort(function(a, b) {
 			return leTri(b[index], a[index]);
 		});
 		sorted.header[index] = titre+" \u2B06";
 		Table(sorted, original);
 	} else if (sens == "\u2B06") {
+		// Reprends le tableau original
 		Table(sorted, original);
 	} else {
+		// Tri le corp du tableau par ordre ascendant
 		sorted.row.sort(function(a, b) {
 			return leTri(a[index], b[index]);
 		});
@@ -67,4 +76,3 @@ function Tri(header, original) {
 		Table(sorted, original);
 	}
 }
-
