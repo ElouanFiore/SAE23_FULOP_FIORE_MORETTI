@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>presentation.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="pr%C3%A9sentation-de-notre-projet-multicast">Présentation de notre projet <em><strong>'Multicast'</strong></em></h1>
+<p style="text-align:center;"><img src="assets/presentation.JPG" width=600px></p>
+<h2 id="uintroduction-u"><u>Introduction :</u></h2>
+<h3 id="notre-site-%22multicast%22-est-une-plateforme-dh%C3%A9bergement-de-serveurs-en-ligne-il-loue-contre-une-r%C3%A9mun%C3%A9ration-diff%C3%A9rents-types-de-serveurs-qui-seraient-adapt%C3%A9s-au-besoin-du-client-cela-comprends-les-serveurs-de-stockage-de-jeu-et-web">Notre site <strong>&quot;Multicast&quot;</strong> est une plateforme d'hébergement de serveurs en ligne. Il loue contre une rémunération, différents types de serveurs qui seraient adaptés au besoin du client. Cela comprends les serveurs de stockage, de jeu et web.</h3>
+<br>
+<h2 id="upr%C3%A9sentation-des-fonctionnalit%C3%A9s-comptes-u"><u><strong>Présentation des fonctionnalités (Comptes) :</strong></u></h2>
+<br>
+<h2 id="linscription"><strong>L'inscription :</strong></h2>
+<h3 id="chaque-visiteur-du-site-a-la-possibilit%C3%A9-de-se-cr%C3%A9er-un-compte-via-un-formulaire-cr%C3%A9er-pour-loccasion">Chaque visiteur du site a la possibilité de se créer un compte via un formulaire créer pour l'occasion.</h3>
+<br>
+<p style="text-align:center;"><img src="assets/inscription.JPG" width=400px></p>
+<h2 id="en-back-end"><em>~ En back-end ~</em></h2>
+<h3 id="une-requ%C3%AAte-sql-va-automatiquement-se-faire-en-php-pour-ins%C3%A9rer-le-nouvel-utilisateur-dans-la-base-de-donn%C3%A9e-le-mot-de-passe-est-automatiquement-hash%C3%A9-en-sha-1-pour-la-s%C3%A9curit%C3%A9">Une requête SQL va automatiquement se faire en PHP pour insérer le nouvel utilisateur dans la base de donnée. Le mot de passe est automatiquement hashé en SHA-1 pour la sécurité.</h3>
+<br>
+<h2 id="la-connexion"><strong>La connexion :</strong></h2>
+<h3 id="une-fois-le-compte-cr%C3%A9%C3%A9-lutilisateur-peut-naturellement-se-connecter-sur-le-site-via-la-page-d%C3%A9di%C3%A9e">Une fois le compte créé, l'utilisateur peut naturellement se connecter sur le site via la page dédiée.</h3>
+<br>
+<p style="text-align:center;"><img src="assets/connexion.JPG" width=400px></p>
+<h2 id="en-back-end"><em>~ En back-end ~</em></h2>
+<h3 id="une-requ%C3%AAte-sql-va-automatiquement-se-faire-en-php-pour-v%C3%A9rifier-les-donn%C3%A9es-par-rapport-%C3%A0-la-base-de-donn%C3%A9es-le-formulaire-prends-en-compte-les-erreurs-et-les-retournes-pour-guider-lutilisateur-mauvais-e-mail-ainsi-de-suite">Une requête SQL va automatiquement se faire en PHP pour vérifier les données par rapport à la base de données. Le formulaire prends en compte les erreurs et les retournes pour guider l'utilisateur (Mauvais e-mail... ainsi de suite)</h3>
+<br>
+<h2 id="modification-des-informations-de-compte"><strong>Modification des informations de compte :</strong></h2>
+<h3 id="si-lutilisateur-souhaite-modifier-des-informations-de-son-compte-comme-son-adresse-mail-son-mot-de-passe-ou-encore-son-pseudo-il-peut-le-faire-via-une-rubrique-de-gestion-de-compte">Si l'utilisateur souhaite modifier des informations de son compte comme son adresse mail, son mot de passe ou encore son pseudo, il peut le faire via une rubrique de gestion de compte.</h3>
+<br>
+<p style="text-align:center;"><img src="assets/modif.JPG" width=600px></p>
+<h2 id="en-back-end"><em>~ En back-end ~</em></h2>
+<h3 id="cela-modifie-automatiquement-les-donn%C3%A9es-associ%C3%A9es-%C3%A0-chaque-utilisateur-les-saisies-sont-filtr%C3%A9es-pour-%C3%A9viter-diverses-injections-sql-et-ainsi-les-failles-de-s%C3%A9curit%C3%A9">Cela modifie automatiquement les données associées à chaque utilisateur. Les saisies sont filtrées pour éviter diverses injections SQL et ainsi les failles de sécurité.</h3>
+<br>
+<h3 id="remarques--tout-ce-qui-est-supprim%C3%A9-que-ce-soit-les-utilisateurs-les-serveurs-restent-dans-la-base-de-donn%C3%A9es-avec-une-valeur-nulle-%C3%A0-l%C3%A9l%C3%A9ment-actif-pour-pouvoir-garder-un-historique-de-chaque-actions-et-une-certaine-harmonie-de-la-base-de-donn%C3%A9e">Remarques : Tout ce qui est supprimé, que ce soit les utilisateurs, les serveurs... restent dans la base de données avec une valeur nulle à l'élément 'Actif' pour pouvoir garder un historique de chaque actions et une certaine harmonie de la base de donnée.</h3>
+<br>
+<hr>
+<br>
+<h2 id="upr%C3%A9sentation-des-fonctionnalit%C3%A9es-location-u"><u><strong>Présentation des fonctionnalitées (Location) :</strong></u></h2>
+<br>
+<h2 id="la-location-de-serveur"><strong>La location de serveur :</strong></h2>
+<h3 id="il-est-possible-au-visiteur-une-fois-inscrit-dacc%C3%A9der-%C3%A0-un-espace-de-location-o%C3%B9-il-peut-chercher-en-temps-r%C3%A9el-par-rapport-%C3%A0-la-disponibilit%C3%A9-des-serveurs-et-%C3%A0-ses-besoins-la-liste-des-serveurs-louables-en-fonction-de-leurs-caract%C3%A9ristiques">Il est possible au visiteur une fois inscrit, d'accéder à un espace de location où il peut chercher en temps réel, par rapport à la disponibilité des serveurs et à ses besoins, la liste des serveurs louables en fonction de leurs caractéristiques.</h3>
+<br>
+<p style="text-align:center;"><img src="assets/louer.JPG" width=550px></p>
+<br>
+<h3 id="il-peut-alors-choisir-le-serveur-qui-lui-plait-puis-dun-clic-le-louer-il-lui-sera-alors-attribu%C3%A9-et-ne-pourra-plus-%C3%AAtre-lou%C3%A9-par-dautres-personnes">Il peut alors choisir le serveur qui lui plait, puis d'un clic, le louer. Il lui sera alors attribué et ne pourra plus être loué par d'autres personnes.</h3>
+<br>
+<h2 id="en-back-end"><em>~ En back-end ~</em></h2>
+<h3 id="lorsque-lutilisateur-clique-sur-le-bouton-%22louer%22-le-serveur-choisi-est-automatiquement-reli%C3%A9-%C3%A0-lutilisateur-via-un-idutilisateur-cest-comme-%C3%A7a-quil-se-d%C3%A9marque-des-autres-serveurs-libres-avec-un-idutilisateur-nul">Lorsque l'utilisateur clique sur le bouton &quot;Louer&quot;, le serveur choisi est automatiquement relié à l'utilisateur via un IDutilisateur. C'est comme ça qu'il se démarque des autres serveurs libres (avec un IDutilisateur nul).</h3>
+<br>
+<h2 id="la-gestion-des-serveurs-lou%C3%A9s"><strong>La gestion des serveurs loués :</strong></h2>
+<h3 id="une-fois-que-lutilisateur-a-louer-ses-diff%C3%A9rents-serveurs-il-a-acc%C3%A8s-%C3%A0-une-nouvelle-page-o%C3%B9-il-peut-voir-le-r%C3%A9capitulatif-des-diff%C3%A9rents-serveurs-quil-a-pris-%C3%A9galement-la-date-de-location-les-sp%C3%A9cificit%C3%A9es-mais-%C3%A9galement-les-rendre-ce-qui-rendra-%C3%A0-nouveau-possible-la-possibilit%C3%A9-de-louer-ce-dit-serveur">Une fois que l'utilisateur a louer ses différents serveurs, il a accès à une nouvelle page où il peut voir le récapitulatif des différents serveurs qu'il a pris, également la date de location, les spécificitées mais également les rendre (ce qui rendra à nouveau possible la possibilité de louer ce dit serveur).</h3>
+<br>
+<p style="text-align:center;"><img src="assets/gestion.JPG" width =550px></p>
+<br>
+<h3 id="il-est-possible-de-trier-par-ordre-d%C3%A9croissant-chaque-options-ainsi-que-dactiver-la-fonction-qui-permet-dafficher-uniquement-les-locations-en-cours-les-autres-serveurs-sont-pr%C3%A9sents-comme-dun-historique-de-ses-anciennes-transactions">Il est possible de trier par ordre dé/croissant chaque options ainsi que d'activer la fonction qui permet d'afficher uniquement les locations en cours. Les autres serveurs sont présents comme d'un historique de ses anciennes transactions.</h3>
+<br>
+<h2 id="en-back-end"><em>~ En back-end ~</em></h2>
+<h3 id="une-requ%C3%AAte-sql-va-automatiquement-se-faire-en-fonction-de-lid-de-lutilisateur-connect%C3%A9-en-regardant-son-id-de-connexion-il-est-donc-possible-dafficher-toutes-les-informations-reli%C3%A9-au-compte-notamment-via-son-idutilisateur-qui-li%C3%A9-%C3%A0-chaque-serveurs-quil-a-lou%C3%A9-le-bouton-rendre-sert-%C3%A0-remettre-%C3%A0-zero-lidutilisateur-li%C3%A9-au-serveur">Une requête SQL va automatiquement se faire en fonction de l'ID de l'utilisateur connecté en regardant son ID de connexion. Il est donc possible d'afficher toutes les informations relié au compte, notamment via son IDutilisateur qui lié à chaque serveurs qu'il a loué. Le bouton 'Rendre' sert à remettre à zero l'IDutilisateur lié au serveur.</h3>
+<hr>
+<br>
+<h2 id="upr%C3%A9sentation-des-fonctionnalit%C3%A9es-dadmninistration-u"><u><strong>Présentation des fonctionnalitées d'admninistration :</strong></u></h2>
+<br>
+<h2 id="la-gestion-des-serveurs-lou%C3%A9s"><strong>La gestion des serveurs loués :</strong></h2>
+<h3 id="lorsquon-se-connecte-avec-un-compte-sp%C3%A9cialement-pr%C3%A9vu-pour-ladministration-admin-en-loccurence-la-page-d%C3%A9bloque-un-nouvel-onglet-accessible-uniquement-pour-cet-utilisateur-et-qui-lui-permet-de-g%C3%A9rer-toutes-les-informations-li%C3%A9-aux-serveurs-ainsi-que-les-utilisateurs">Lorsqu'on se connecte avec un compte spécialement prévu pour l'administration (admin en l'occurence), la page débloque un nouvel onglet accessible uniquement pour cet utilisateur et qui lui permet de gérer toutes les informations lié aux serveurs ainsi que les utilisateurs.</h3>
+<br>
+<p style="text-align:center;"><img src="assets/pannel.JPG"></p>
+<br>
+<h3 id="ladministrateur-peut-g%C3%A9rer-sur-cette-page"><strong>L'administrateur peut gérer sur cette page :</strong></h3>
+<br>
+<ul>
+<li>
+<h3 id="les-serveurs--cela-implique-dafficher-lenti%C3%A9ret%C3%A9-des-serveurs-disponibles-ou-non-il-y-a-%C3%A9galement-un-historique-des-serveurs-supprim%C3%A9s-mais-%C3%A9galement-la-pr%C3%A9sence-dun-bouton-supprimer-qui-sert-%C3%A0-retirer-de-la-base-de-donn%C3%A9e-tout-en-gardant-une-trace-un-serveur-pour-quil-ne-soit-plus-disponible-%C3%A0-la-location">~ Les serveurs : Cela implique d'afficher l'entiéreté des serveurs disponibles ou non (Il y a également un historique des serveurs supprimés) mais également la présence d'un bouton 'Supprimer' qui sert à retirer de la base de donnée (Tout en gardant une trace) un serveur pour qu'il ne soit plus disponible à la location.</h3>
+</li>
+</ul>
+<br>
+<p><u>Aperçu :</u> <p style="text-align:center;"><img src="assets/1.JPG" width=500px></p></p>
+<br>
+<ul>
+<li>
+<h3 id="les-clients--cet-onglet-affiche-tout-les-utilisateurs-inscrits-sur-le-site-ainsi-que-leur-informations-principales-comme-leur-adresse-e-mail-leur-id-nompr%C3%A9nom-mais-il-y-a-%C3%A9galement-un-bouton-supprimer-qui-sert-simplement-%C3%A0-retirer-un-utilisateur-de-la-base-de-donn%C3%A9e-pour-quil-ne-puisse-plus-se-connecter-cela-%C3%A0-pour-effet-de-remettre-%C3%A0-z%C3%A9ro-tout-les-serveurs-auquel-il-%C3%A9tait-li%C3%A9">~ Les clients : Cet onglet affiche tout les utilisateurs inscrits sur le site ainsi que leur informations principales comme leur adresse e-mail, leur ID, nom/prénom, mais il y a également un bouton 'Supprimer' qui sert simplement à retirer un utilisateur de la base de donnée pour qu'il ne puisse plus se connecter. Cela à pour effet de remettre à zéro tout les serveurs auquel il était lié.</h3>
+</li>
+</ul>
+<br>
+<p><u>Aperçu :</u> <p style="text-align:center;"><img src="assets/2.JPG" width=500px></p></p>
+<br>
+<ul>
+<li>
+<h3 id="les-locations--finalement-dans-cette-section-se-trouve-tout-les-serveurs-qui-sont-ou-ont-%C3%A9t%C3%A9s-lou%C3%A9s-cest-pratique-pour-avoir-une-vue-densemble-de-lactivit%C3%A9-des-serveurs-il-y-a-un-bouton-terminer-qui-permet-lui-darr%C3%AAter-la-location-dun-serveur">~ Les locations : Finalement dans cette section se trouve tout les serveurs qui sont ou ont étés loués. C'est pratique pour avoir une vue d'ensemble de l'activité des serveurs. Il y a un bouton 'Terminer' qui permet lui d'arrêter la location d'un serveur.</h3>
+</li>
+</ul>
+<p><u>Aperçu :</u> <p style="text-align:center;"><img src="assets/3.JPG" width=500px></p></p>
+<br>
+<hr>
+<h4 id="%E2%98%81%EF%B8%8F-projet-multicast--elouan-fiorre-timoth%C3%A9e-fulop-luigi-moretti-%E2%98%81%EF%B8%8F">☁️ Projet Multicast ~ Elouan FIORRE, Timothée FULOP, Luigi MORETTI ☁️</h4>
+
+</body>
+</html>
