@@ -4,7 +4,7 @@ session_start();
 require("connexion-base.php");
 
 // si l'admin est authentifié et qu'il demande une suppresion
-if (isset($_SESSION["username"]) AND $_SESSION["username"] == "admin" AND isset($_POST["loc"])) {
+if (isset($_SESSION["username"]) AND $_SESSION["username"] == "adminMulticast" AND isset($_POST["loc"])) {
 	$loc = htmlspecialchars($_POST["loc"]);
 
 	// vérifie que la location existe bien

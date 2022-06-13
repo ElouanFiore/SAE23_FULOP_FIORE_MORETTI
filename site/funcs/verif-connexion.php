@@ -21,7 +21,7 @@ if(isset($_POST['username']) AND isset($_POST['password'])) {
 	$rows=$stmt->fetchAll();
 	$stmt->closeCursor();
 	
-	if (!filter_var($username, FILTER_VALIDATE_EMAIL) AND $username !== "admin") {
+	if (!filter_var($username, FILTER_VALIDATE_EMAIL) AND $username !== "adminMulticast") {
 		// si l'username n'est pas une adresse email valide ou "admin"
    		header('Location: ../login.php?err=mail'.$get);
 		die();
@@ -38,7 +38,7 @@ if(isset($_POST['username']) AND isset($_POST['password'])) {
 	
 	if ($rows[0]["id"] == 1) {
 		// utilise admin comme moyen d'authentification
-		$nomprenom = "admin";
+		$nomprenom = "adminMulticast";
 	} else {
 		// formate une chaine de caractères pour la faire apparaitre sur la page index.php
 		$nom = strtoupper($rows[0]["nom"]);

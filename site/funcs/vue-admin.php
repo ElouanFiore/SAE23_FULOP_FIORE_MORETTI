@@ -3,7 +3,7 @@
 session_start();
 
 // si l'admin est authentifié et qu'il a bien demandé une table
-if (isset($_SESSION["username"]) AND $_SESSION["username"] == "admin" AND isset($_POST["vue"])) {
+if (isset($_SESSION["username"]) AND $_SESSION["username"] == "adminMulticast" AND isset($_POST["vue"])) {
 	require("func-tableau.php");
 	require("connexion-base.php");
 	$vue = htmlspecialchars($_POST["vue"]);

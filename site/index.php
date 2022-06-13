@@ -23,7 +23,7 @@ session_start();
 			</div>
 			<div class="buttons">
 			<?php
-			if(isset($_SESSION['username']) && $_SESSION['username'] == 'admin'){
+			if(isset($_SESSION['username']) && $_SESSION['username'] == 'adminMulticast'){
 				echo"<button class=\"admin\" onclick=\"window.location.href='admin.php';\">Administration</button>";
 				echo"<button class='user'>Compte</button>";
 				echo"<button class='deconnexion'>Se déconnecter</button>";

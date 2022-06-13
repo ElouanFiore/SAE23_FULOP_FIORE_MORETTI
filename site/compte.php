@@ -27,7 +27,7 @@ if (!isset($_SESSION["username"])) {
 
 <form action='funcs/modif.php' method='POST'>
 <?php
-if ($_SESSION["username"] != "admin") {
+if ($_SESSION["username"] != "adminMulticast") {
 ?>
 	<h1>Modifier vos informations de compte 🔧</h1>
 
@@ -98,7 +98,7 @@ if ($_SESSION["username"] != "admin") {
 </form>
 <script>
 <?php
-if ($_SESSION["username"] != "admin") {
+if ($_SESSION["username"] != "adminMulticast") {
 ?>
 		var valeurs = {
 			pre: [{

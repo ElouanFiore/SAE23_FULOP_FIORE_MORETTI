@@ -4,7 +4,7 @@ session_start();
 require("connexion-base.php");
 
 // execute le script seulement si toutes les options POST sont présentes et que l'admin est authentifié
-if (isset($_SESSION["username"]) AND $_SESSION["username"] == "admin" AND isset($_POST["type"]) AND isset($_POST["ram"]) AND isset($_POST["cpu"]) AND isset($_POST["stockage"])) {
+if (isset($_SESSION["username"]) AND $_SESSION["username"] == "adminMulticast" AND isset($_POST["type"]) AND isset($_POST["ram"]) AND isset($_POST["cpu"]) AND isset($_POST["stockage"])) {
 	$ram = htmlspecialchars($_POST["ram"]);
 	$cpu = htmlspecialchars($_POST["cpu"]);
 	$type = htmlspecialchars($_POST["type"]);

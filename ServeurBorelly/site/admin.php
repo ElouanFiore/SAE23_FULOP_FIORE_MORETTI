@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!(isset($_SESSION["username"]) AND $_SESSION["username"] == "admin")) {
+if (!(isset($_SESSION["username"]) AND $_SESSION["username"] == "adminMulticast")) {
 	header("Location: index.php");
 }
 require("funcs/func-tableau.php");
@@ -14,9 +14,9 @@ require("funcs/connexion-base.php");
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-	<title>Page d'administration</title>
 	<link rel="stylesheet" href="css/styleAdmin.css" media="screen" type="text/css" />
- 	<script src="funcs/func-tableau.js"></script>
+	<title>Page d'administration</title>
+	<script src="funcs/func-tableau.js"></script>
 </head>
 
 

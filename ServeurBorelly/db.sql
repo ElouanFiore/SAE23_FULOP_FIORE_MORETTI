@@ -1,9 +1,6 @@
-DROP TABLE IF EXISTS `db_FIORE`.`serveurs`;
-DROP TABLE IF EXISTS `db_FIORE`.`clients`;
-DROP TABLE IF EXISTS `db_FIORE`.`locations`;
-DROP VIEW IF EXISTS `db_FIORE`.`ServeursReserve`;
-DROP VIEW IF EXISTS `db_FIORE`.`ServeursLibre`;
-DROP VIEW IF EXISTS `db_FIORE`.`VueClient`;
+DROP DATABASE IF EXISTS `db_FIORE`;
+
+CREATE DATABASE `db_FIORE`;
 
 CREATE TABLE `db_FIORE`.`serveurs` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -41,7 +38,7 @@ CREATE VIEW `db_FIORE`.`VueClient` (ID, Début, Fin, IdServeur, Type, CPU, RAM, 
 
 CREATE VIEW `db_FIORE`.`ServeursDispo` (IdServeur, Type, CPU, RAM, STOCKAGE) AS SELECT serveurs.id, serveurs.type, serveurs.cpu, serveurs.ram, serveurs.stockage FROM `db_FIORE`.`serveurs` WHERE serveurs.idLocation IS NULL && serveurs.enService=1;
 
-INSERT INTO `db_FIORE`.`clients` (`email`, `mdp`, `nom`, `prenom`) VALUES ('admin', SHA1('admin'), 'admin', 'admin');
+INSERT INTO `db_FIORE`.`clients` (`email`, `mdp`, `nom`, `prenom`) VALUES ('adminMulticast', SHA1('adminMulticast'), 'adminMulticast', 'adminMulticast');
 INSERT INTO `db_FIORE`.`clients` (`email`, `mdp`, `nom`, `prenom`) VALUES ('toto@protonmail.com', SHA1('abcdef'), 'toto', 'toto');
 INSERT INTO `db_FIORE`.`clients` (`email`, `mdp`, `nom`, `prenom`) VALUES ('tata@gmail.com', SHA1('123456'), 'tata', 'tata');
 

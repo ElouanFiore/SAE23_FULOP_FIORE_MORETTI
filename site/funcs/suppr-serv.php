@@ -4,7 +4,7 @@ session_start();
 require("connexion-base.php");
 
 // éxecute le script seulement si toutes les options POST sont présentes et que l'admin est authentifié
-if (isset($_SESSION["username"]) AND $_SESSION["username"] == "admin" AND isset($_POST["serv"])) {
+if (isset($_SESSION["username"]) AND $_SESSION["username"] == "adminMulticast" AND isset($_POST["serv"])) {
 	$serv = htmlspecialchars($_POST["serv"]);
 
 	// vérifie que le serveur n'est pas en locations

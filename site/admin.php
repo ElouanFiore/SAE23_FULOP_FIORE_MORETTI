@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!(isset($_SESSION["username"]) AND $_SESSION["username"] == "admin")) {
+if (!(isset($_SESSION["username"]) AND $_SESSION["username"] == "adminMulticast")) {
 	header("Location: index.php");
 }
 require("funcs/func-tableau.php");

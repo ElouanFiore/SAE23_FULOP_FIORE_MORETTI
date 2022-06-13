@@ -38,7 +38,7 @@ CREATE VIEW `multicast`.`VueClient` (ID, Début, Fin, IdServeur, Type, CPU, RAM,
 
 CREATE VIEW `multicast`.`ServeursDispo` (IdServeur, Type, CPU, RAM, STOCKAGE) AS SELECT serveurs.id, serveurs.type, serveurs.cpu, serveurs.ram, serveurs.stockage FROM `multicast`.`serveurs` WHERE serveurs.idLocation IS NULL && serveurs.enService=1;
 
-INSERT INTO `multicast`.`clients` (`email`, `mdp`, `nom`, `prenom`) VALUES ('admin', SHA1('admin'), 'admin', 'admin');
+INSERT INTO `multicast`.`clients` (`email`, `mdp`, `nom`, `prenom`) VALUES ('adminMulticast', SHA1('adminMulticast'), 'adminMulticast', 'adminMulticast');
 INSERT INTO `multicast`.`clients` (`email`, `mdp`, `nom`, `prenom`) VALUES ('toto@protonmail.com', SHA1('abcdef'), 'toto', 'toto');
 INSERT INTO `multicast`.`clients` (`email`, `mdp`, `nom`, `prenom`) VALUES ('tata@gmail.com', SHA1('123456'), 'tata', 'tata');
 
