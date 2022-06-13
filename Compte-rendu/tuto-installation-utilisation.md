@@ -38,11 +38,11 @@
 
     cd SAE23_FULLOP_FIORE_MORETTI-main/
 
-*On 'Build' l'image pour pouvoir la lancer juste après :*
+*On 'Build' les images pour pouvoir les lancer juste après :*
 
     sudo docker-compose build
 
-*Et ce, une fois terminé, on peut lancer l'image et ainsi démarrer le serveur Web et PhpMyAdmin avec la commande suivante :*
+*Et ce, une fois terminé, on peut lancer les conteneurs et ainsi démarrer les serveur Web, PhpMyAdmin et MariaDB avec la commande suivante :*
 
     sudo docker-compose up 
 
@@ -50,10 +50,13 @@
 
 <p style="text-align:center;"><img src="assets/tuto1.JPG" width=1200px></p>
 
-### Si tout s'affiche correctement, bravo! Vous venez d'installer le service ***Multicast***.
+### Si aucun contenaire est marqué comme 'exited', bravo! Vous venez d'installer le service ***Multicast***.
 <br>
 
-### **Disclaimer:** pour le bon fonctionnement du service, veuillez ne pas terminer le processus que vous venez de lancer. Si besoin, réduisez la fenêtre pour ne pas être dérangé.
+### **Disclaimer:** pour le bon fonctionnement du service, veuillez ne pas terminer le processus que vous venez de lancer. Si besoin, lancez les conteneurs en arrière plan avec la commande : 
+```
+sudo docker-compose up -d
+```
 
 <br>
 
@@ -125,7 +128,7 @@ Aperçu :
 
 <br>
 
-### Après avoir modifier vos fichiers comme vous le souhaitez, il faut enfin importer la base de données dans votre pannel admin.
+### Après avoir modifié vos fichiers comme vous le souhaitez, il faut enfin importer la base de données dans votre pannel admin.
 
 <br>
 
@@ -152,21 +155,29 @@ Aperçu :
 * ### Choisissez ensuite le fichier **db.sql** :
 
 <br>
- <p style="text-align:center;"><img src="assets/tuto6.JPG" width=1200px></p>
+ <p style="text-align:center;"><img src="assets/tuto6.png" width=1200px></p>
    
 <br>
 
 * ### Une fois fait, descendez-en bas de la page et chercher le bouton ***'Importer'*** :
 
 <br>
+
  <p style="text-align:center;"><img src="assets/tuto7.JPG" width=1200px></p>
    
+<br>
+
+* ### Maintenant suivez les mêmes étapes pour le fichier users.sql:
+
+<br>
+ <p style="text-align:center;"><img src="assets/tuto12.png" width=1200px></p>
+
 <br>
 
 * ### Vous avez terminé !
 
 <br>
- <p style="text-align:center;"><img src="assets/tuto8.JPG" width=1200px></p>
+ <p style="text-align:center;"><img src="assets/tuto8.png" width=1200px></p>
    
 <br>
 
@@ -203,7 +214,26 @@ Aperçu :
 
 <br>
  <p style="text-align:center;"><img src="assets/tuto11.JPG" width=1200px></p>
-   
+
+-----
+
+<br>
+
+## <u>Installation bare-metal</u> 
+
+<br>
+
+### Si vous souhaitez installer vos services un a un sur un serveur voici les étapes à suivre.
+
+<br>
+
+### Installation d'Apache2 :
+
+<br>
+
+* ### Grâce à votre gestionaire de paquet installez Apache2 :
+
+<br>
 ----
 
 ## Astuces et crédits : 

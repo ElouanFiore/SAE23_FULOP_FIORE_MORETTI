@@ -34,7 +34,7 @@
   <br>
 
 * ### Pas de présence de protection anti-clickjacking dans le header du serveur apache :
-### ~ Résolution du problème dans les fichiers de configuration sur apache :  
+### ~ Résolution du problème dans le fichier de configuration /etc/apache2/conf-enabled/security.conf sur apache :  
 
     a2enmod headers # Ajout d'un mode 
 
