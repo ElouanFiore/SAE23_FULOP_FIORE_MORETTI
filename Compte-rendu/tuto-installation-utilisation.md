@@ -1,6 +1,5 @@
 <body style="background-color:black;">
 
-
 # Tutoriel d'installation et d'utilisation de ***'Multicast'***
 
 <p style="text-align:center;"><img src="assets/presentation.JPG" width=600px></p>
@@ -134,10 +133,10 @@ Aperçu :
 
 <br>
 
-* ### Première étape : Connectez vous à votre service PhpMyAdmin (lien : localhost:8081) avec les identifiants admin (root:root par défaut)
+* ### Première étape : Connectez-vous à votre service PhpMyAdmin (lien : localhost:8081) avec les identifiants admin (root:root par défaut)
   <br>
 
-* ### Redirigez vous dans l'onglet ***'Importation'*** :
+* ### Redirigez-vous dans l'onglet ***'Importation'*** :
 <br>
  <p style="text-align:center;"><img src="assets/tuto4.JPG" width=1200px></p>
    
@@ -150,14 +149,14 @@ Aperçu :
    
 <br>
 
-* ### Choissisez ensuite le fichier **db.sql** :
+* ### Choisissez ensuite le fichier **db.sql** :
 
 <br>
  <p style="text-align:center;"><img src="assets/tuto6.JPG" width=1200px></p>
    
 <br>
 
-* ### Une fois fait, descendez en bas de la page et chercher le bouton ***'Importer'*** :
+* ### Une fois fait, descendez-en bas de la page et chercher le bouton ***'Importer'*** :
 
 <br>
  <p style="text-align:center;"><img src="assets/tuto7.JPG" width=1200px></p>
@@ -186,7 +185,7 @@ Aperçu :
    
 <br>
 
-### Vous pouvez a présent faire tout ce que vous voulez sur le site !
+### Vous pouvez à présent faire tout ce que vous voulez sur le site !
 
 <br>
 
@@ -210,8 +209,9 @@ Aperçu :
 ## Astuces et crédits : 
 <br>
 
-### Pour en savoir un peu plus sur les fonctionnalités du site, vous pouvez vous réferrez au 'cahier-des-charges' fourni.
+### Pour en savoir un peu plus sur les fonctionnalités du site, vous pouvez vous référez au 'cahier-des-charges' fourni.
 
 <br>
 
 #### ***☁️ Projet Multicast ~ Elouan FIORRE, Timothée FULOP, Luigi MORETTI ☁️***
+
