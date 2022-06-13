@@ -1,5 +1,6 @@
 <?php
 session_start();
+// Vérifie qu'un utilisateur est authentifié
 if (!isset($_SESSION["username"])) {
 	header("Location: login.php?redirect=compte.php");
 	die();
@@ -27,6 +28,7 @@ if (!isset($_SESSION["username"])) {
 
 <form action='funcs/modif.php' method='POST'>
 <?php
+
 if ($_SESSION["username"] != "adminMulticast") {
 ?>
 	<h1>Modifier vos informations de compte 🔧</h1>
@@ -42,6 +44,7 @@ if ($_SESSION["username"] != "adminMulticast") {
 		<div id="clean">
 		</div>
 <?php
+// affiche seulement la modification du mdp pour l'admin
 } else {
 ?>
 	<h1 id="top">Modifier le mot de passe du compte Admin</h1>
@@ -65,6 +68,7 @@ if ($_SESSION["username"] != "adminMulticast") {
 		<input type="submit" id='submit' value="Valider">
 
 		<?php
+		// affiche les erreur de al page modif.php
 		if (isset($_GET["erreur"])) {
 			switch ($_GET["erreur"]) {
 				case "mdp";
@@ -161,6 +165,7 @@ if ($_SESSION["username"] != "adminMulticast") {
 		var roulette = document.getElementById("select");
 		var clean = document.getElementById("clean");
 
+		// change l'option de modification
 		function Change(val) {
 			clean.innerHTML = "";
 			roulette.value = val;
@@ -184,6 +189,7 @@ if ($_SESSION["username"] != "adminMulticast") {
 			Change(roulette.value);
 		});
 		<?php
+		// affiche le bon changement au chargement de la page
 		if (isset($_GET["type"])) {
 			switch ($_GET["type"]) {
 				case "pre";

@@ -1,5 +1,6 @@
 <?php
 session_start();
+// Vérifie qu'un utilisateur est authentifié
 if (!isset($_SESSION["username"])) {
 	header("Location: login.php?redirect=gestion.php");
 	die();
@@ -28,6 +29,7 @@ require_once("funcs/func-tableau.php");
 	</div>
 
 	<?php
+	// affiche le retour de la fonction debut-loc.php et term-loc.php
 	if (isset($_GET["res"])) {
 		switch($_GET["res"]) {
 			case "del";
@@ -51,9 +53,11 @@ require_once("funcs/func-tableau.php");
 	<script>
 	
 	<?php
+	// tableau des serveurs louer par l'utilisateur
 	tableau($db, "SELECT ID, Début, Fin, IdServeur, Type, CPU, RAM, STOCKAGE FROM `VueClient` WHERE mail='".$_SESSION["username"]."' ORDER BY id DESC", "locs");
 	?>
 	
+	// Ajoute le bouton pour l'action
 	locs.header.push("Action");
 	locs.row.forEach(val => {
 		if (val[2] == "") {
@@ -67,6 +71,7 @@ require_once("funcs/func-tableau.php");
 	});
 
 	function Rendre(id) {
+		// crée un formulaire cacher pour transférer en POST vers term-loc.php
 		var formul = document.createElement("form");
 		formul.method = "POST";
 		formul.action = "funcs/term-loc.php";
@@ -81,6 +86,7 @@ require_once("funcs/func-tableau.php");
 	}
 
 	function Actif() {
+		// filtre la table actuellement afficher pour n'avoir que les valeurs actives
 		document.getElementById("table").innerHTML = "";
 		var index = 2;
 		var newTable = JSON.parse(JSON.stringify(locs));

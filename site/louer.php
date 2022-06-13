@@ -1,5 +1,6 @@
 <?php
 session_start();
+// Vérifie qu'un utilisateur est authentifié
 if (!isset($_SESSION["username"])) {
 		header("Location: login.php?redirect=louer.php");
 }
@@ -67,6 +68,7 @@ require("funcs/func-tableau.php");
 
 	<script>
 		function Reserver(id) {
+			// crée un formulaire cacher pour transférer en POST vers debut-loc.php
 			var formul = document.createElement("form");
 			formul.method = "POST";
 			formul.action = "funcs/debut-loc.php";
@@ -81,7 +83,7 @@ require("funcs/func-tableau.php");
 		}
 
 		function choix_type() {
-			//Type
+			// Pour afficher le type dans l'animation
 			var type = document.getElementById("choix_type").value;
 			switch (type) {
 				case "JEU":
@@ -107,7 +109,7 @@ require("funcs/func-tableau.php");
 		}
 
 		function cpu() {
-			//Cpu
+			// Pour afficher le CPU dans l'animation
 			var cpu = document.getElementById("choix_cpu").value;
 			switch (cpu) {
 				case "8":
@@ -133,6 +135,7 @@ require("funcs/func-tableau.php");
 		}
 
 		function ram() {
+			// Pour afficher la RAM dans l'animation
 			var ram = document.getElementById("choix_ram").value;
 			switch (ram) {
 				case "32":
@@ -157,6 +160,7 @@ require("funcs/func-tableau.php");
 			}
 		}
 
+		// récupère les donnée des serveurs spécifié via fetch
 		async function choix() {
 			var type = document.getElementById("choix_type").value;
 			var cpu = document.getElementById("choix_cpu").value;
@@ -178,6 +182,7 @@ require("funcs/func-tableau.php");
 					servs.header.push("Action");
 					servs.row.forEach(val => {
 						let id = val[0];
+						// Ajoute le bouton pour louer
 						let click = "<span onclick='Reserver("+id+")' style='cursor: pointer;'>Louer</span>";
 						val.push(click);
 					});

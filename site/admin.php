@@ -1,5 +1,6 @@
 <?php
 session_start();
+// Vérifie que l'admin soit authentifié
 if (!(isset($_SESSION["username"]) AND $_SESSION["username"] == "adminMulticast")) {
 	header("Location: index.php");
 }
@@ -61,6 +62,7 @@ require("funcs/connexion-base.php");
 	</div>
 
 	<?php
+	// Affiche les erreurs retourné par ajout-serv.php
 	if (isset($_GET["err"])) {
 		switch ($_GET["err"]) {
 			case "stock";
@@ -79,6 +81,7 @@ var locs = {};
 var clients = {};
 
 function Close(id) {
+	// crée un formulaire cacher pour transférer en POST vers suppr-client.php
 	let val = document.createElement("input");
 	val.type = "hidden";
 	val.name = "client";
@@ -92,6 +95,7 @@ function Close(id) {
 }
 
 function Term(id) {
+	// crée un formulaire cacher pour transférer en POST vers term-loc.php
 	let val = document.createElement("input");
 	val.type = "hidden";
 	val.name = "loc";
@@ -105,6 +109,7 @@ function Term(id) {
 }
 
 function Suppr(id) {
+	// crée un formulaire cacher pour transférer en POST vers suppr-serv.php
 	let val = document.createElement("input");
 	val.type = "hidden";
 	val.name = "serv";
@@ -118,6 +123,7 @@ function Suppr(id) {
 }
 
 function Actif() {
+	// filtre la table actuellement afficher pour n'avoir que les valeurs actives
 	newTable = {};
 	var index = 0;
 	document.getElementById("table").innerHTML = "";
@@ -163,6 +169,7 @@ function Actif() {
 }
 
 async function AffLocs() {
+	// utilise fetch pour obtenir le dictionaire js afin de créer le tableau des locations
 	document.getElementById("addServ").hidden = true;
 	document.getElementById("table").innerHTML = "";
 	document.getElementById("labactiv").innerHTML = "Afficher seulement les locations en cours";
@@ -177,6 +184,7 @@ async function AffLocs() {
 	locs.row.forEach(val => {
 		if (val[4] == "") {
 			let id = val[0];
+			// Ajoute le bouton pour l'action
 			let click = "<span onclick='Term("+id+")' style='cursor: pointer;'>Terminer</span>";
 			val.push(click);
 		} else {
@@ -185,6 +193,7 @@ async function AffLocs() {
 		}
 	});
 
+	// vérifie si le tableau doit être trié par actif
 	if (document.getElementById("activation").checked) {
 		Actif(locs);
 	} else {
@@ -193,6 +202,7 @@ async function AffLocs() {
 }
 
 async function AffServ() {
+	// utilise fetch pour obtenir le dictionaire js afin de créer le tableau des serveurs
 	document.getElementById("table").innerHTML = "";
 	document.getElementById("labactiv").innerHTML = "Afficher seulement les serveurs en services";
 	document.getElementById("addServ").hidden = false;
@@ -207,6 +217,7 @@ async function AffServ() {
 	servs.row.forEach(val => {
 		if (val[6] == 1) {
 			let id = val[0];
+			// Ajoute le bouton pour l'action
 			let click = "<span onclick='Suppr("+id+")' style='cursor: pointer;'>Supprimer</span>";
 			val.push(click);
 		} else {
@@ -215,6 +226,7 @@ async function AffServ() {
 		}
 	});
 
+	// vérifie si le tableau doit être trié par actif
 	if (document.getElementById("activation").checked) {
 		Actif();
 	} else {
@@ -223,6 +235,7 @@ async function AffServ() {
 }
 
 async function AffCli() {
+	// utilise fetch pour obtenir le dictionaire js afin de créer le tableau des clients
 	document.getElementById("addServ").hidden = true;
 	document.getElementById("table").innerHTML = "";
 	document.getElementById("labactiv").innerHTML = "Afficher seulement les clients actifs";
@@ -237,6 +250,7 @@ async function AffCli() {
 	clients.row.forEach(val => {
 		if (val[4] == "1") {
 			let id = val[0];
+			// Ajoute le bouton pour l'action
 			let click = "<span onclick='Close("+id+")' style='cursor: pointer;'>Supprimer</span>";
 			val.push(click);
 		} else {
@@ -245,6 +259,7 @@ async function AffCli() {
 		}
 	});
 
+	// vérifie si le tableau doit être trié par actif
 	if (document.getElementById("activation").checked) {
 		Actif(clients);
 	} else {
@@ -252,6 +267,7 @@ async function AffCli() {
 	}
 }
 
+// défini la tablme à afficher après le chargement de la page
 <?php
 if (isset($_GET["table"])) {
 	switch ($_GET["table"]) {

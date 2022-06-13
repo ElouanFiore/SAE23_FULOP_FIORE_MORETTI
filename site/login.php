@@ -1,5 +1,6 @@
 <?php
 session_start();
+// redirige l'utilisateur si il est déjà authentifié
 if (isset($_SESSION["username"])) {
 	header('Location: index.php');
 	die();
@@ -23,6 +24,7 @@ if (isset($_SESSION["username"])) {
 </nav>
 <div id="logz">
 	<?php
+	// gère la redirection après l'inscription
 	if (isset($_GET["redirect"])) {
 		printf("<form action='funcs/verif-connexion.php?redirect=%s' method='POST'>", $_GET["redirect"]);
 	} else {
@@ -41,6 +43,7 @@ if (isset($_SESSION["username"])) {
 	<input type="submit" id='submit' value="Se connecter">
 
 	<?php
+	// affiche les erreurs de la fonctions verif-connexion.php
 	if (isset($_GET["err"])) {
 		switch($_GET["err"]) {
 			case "inexistant";
@@ -55,6 +58,7 @@ if (isset($_SESSION["username"])) {
 		}
 	}
 
+	// gère la redirection si l'utilisateur décide de s'inscrire
 	if (isset($_GET["redirect"])) {
 		printf("<p>Pas encore inscrit ? <a href='inscription.php?redirect=%s'>Cliquez ici.</a></p>", $_GET["redirect"]);
 	} else {

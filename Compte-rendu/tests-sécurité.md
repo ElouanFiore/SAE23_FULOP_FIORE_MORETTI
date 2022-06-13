@@ -1,5 +1,3 @@
-<body style="background-color:black;">
-
 # Tests et mesures de sécurité de l'application web ***'Multicast'***
 
 <p style="text-align:center;"><img src="assets/presentation.JPG" width=600px></p>
@@ -36,7 +34,7 @@
 * ### Pas de présence de protection anti-clickjacking dans le header du serveur apache :
 ### ~ Résolution du problème dans le fichier de configuration /etc/apache2/conf-enabled/security.conf sur apache :  
 
-    a2enmod headers # Ajout d'un mode 
+    a2enmod headers # Ajout d'un module
 
     sudo nano 000-default.conf # Modification configuration 
 

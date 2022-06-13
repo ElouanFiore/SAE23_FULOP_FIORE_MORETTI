@@ -1,5 +1,3 @@
-<body style="background-color:black;">
-
 # Tutoriel d'installation et d'utilisation de ***'Multicast'***
 
 <p style="text-align:center;"><img src="assets/presentation.JPG" width=600px></p>
@@ -227,13 +225,77 @@ Aperçu :
 
 <br>
 
-### Installation d'Apache2 :
+### **Disclaimer:** Les versions des services que vous allez installer seront surement différentes de celles utilisé lors du développement, il se peut que le site ai des malfonctions. 
 
 <br>
 
-* ### Grâce à votre gestionaire de paquet installez Apache2 :
+### Installation d'Apache2 et PHP:
 
 <br>
+
+* ### Grâce à votre gestionnaire de paquet installez les paquets nécessaires :
+        sudo apt install php apache2 libapache2-mod-php php-mcrypt php-mysql
+
+<br>
+
+* ### Activez les module header et php d'Apache2 :
+        a2enmod headers
+        a2enmod php5
+
+<br>
+
+* ### Décommentez la ligne suivante dans le fichier /etc/apache2/conf-enabled/security.conf (en retirant le #) :
+        #LoadModule php5_module /etc/apache2/mods-available/libphp5.so
+
+<br>
+
+* ### Ajoutez les lignes suivantes au fichier /etc/apache2/conf-enabled/security.conf :
+        ligne
+
+<br>
+
+* ### Redémarrez le service Apache2 :
+        sudo systemctl restart Apache2.service
+
+<br>
+
+### Installation de MariaDB :
+
+<br>
+
+* ### Téléchargez MariaDB depuis votre gestionnaire de paquets
+        sudo apt install mariadb-server
+    
+<br>
+
+* ### Lancez l'installation avec le script fournis (vous définirez votre mot de passe root pour la base de donnée):
+        sudo mysql_secure_installation
+
+<br>
+
+### Installation de PHPMyAdmin :
+
+<br>
+
+* ### Téléchargez PHPMyAdmin depuis votre gestionnaire de paquets
+        sudo apt install phpmyadmin php-mbstring php-zip php-gd php-json php-curl
+
+<br>
+
+* ### Activez le mode mbstring pour PHP :
+        sudo phpenmod mbstring
+
+<br>
+
+* ### Redémarrez Apache2
+        sudo systemctl restart Apache2.service
+
+<br>
+
+### Voilà votre serveur est maintenant installé il ne reste plus qu'à importer les fichiers SQL dans PHPMyAdmin comme déjà montré. Enfin copiez le contenu du dossier site dans le répertoire /var/www/html.
+
+<br>
+
 ----
 
 ## Astuces et crédits : 
